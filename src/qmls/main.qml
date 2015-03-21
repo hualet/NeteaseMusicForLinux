@@ -51,10 +51,10 @@ Window {
 
                                 PlaylistIconView {
                                     id: icon_view
-                                    width: parent.width
+                                    width: cellWidth * 4
                                     height: parent.height
 
-                                    anchors.horizontalCenter: parent
+                                    anchors.horizontalCenter: parent.horizontalCenter
 
                                     Connections {
                                         target: _controller

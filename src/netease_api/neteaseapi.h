@@ -18,13 +18,16 @@ public:
 
     void login(QString &, QString &);
     void topPlaylist(QString category="全部", QString order="hot", quint8 offset=0, quint8 limit=50);
+    void playlistDetail(QString);
 
 signals:
     void topPlaylistGot(QString playlists);
+    void playlistDetailGot(QString detail);
 
 private slots:
     void handleLoginFinished();
     void handleTopPlaylistFinished();
+    void handlePlaylistDetailFinished();
 
 private:
     QNetworkAccessManager *m_networkManager;
