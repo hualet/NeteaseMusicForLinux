@@ -2,5 +2,11 @@
     <qresource prefix="/">
         <file>src/qmls/main.qml</file>
         <file>src/qmls/Header.qml</file>
+        <file>src/qmls/Footer.qml</file>
+        <file>src/qmls/PlaylistIconView.qml</file>
+        <file>src/qmls/HTTabView.qml</file>
+        <file>src/qmls/HSep.qml</file>
+        <file>src/qmls/VSep.qml</file>
+        <file>src/qmls/HTTabContent.qml</file>
     </qresource>
 </RCC>

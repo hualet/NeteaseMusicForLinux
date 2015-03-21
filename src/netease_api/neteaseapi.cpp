@@ -6,10 +6,12 @@
 #include <QUrl>
 #include <QUrlQuery>
 #include <QJsonDocument>
+#include <QJsonArray>
 #include <QDebug>
 #include <QTextCodec>
 
-NeteaseAPI::NeteaseAPI():
+NeteaseAPI::NeteaseAPI(QObject *parent):
+    QObject(parent),
     m_networkManager(new QNetworkAccessManager(this))
 {
     m_headerMap["Accept"] = "*/*";
@@ -76,16 +78,19 @@ void NeteaseAPI::handleTopPlaylistFinished()
 
     if (!reply->error()) {
         QByteArray array = reply->readAll();
-        qDebug() << array;
+//        qDebug() << array;
         QJsonDocument document = QJsonDocument::fromJson(array);
         QJsonObject object = document.object();
-        if (!object["playlists"].isNull()) {
-            qDebug() << "handleTopPlaylistFinished data" << object["playlists"].toString();
+        QJsonArray playlists = object["playlists"].toArray();
+
+        if (!playlists.isEmpty()) {
+            QJsonDocument document(playlists);
+            emit topPlaylistGot(QString(document.toJson()));
         } else {
-            qDebug() << "handleTopPlaylistFinished" << "no key named playlists.";
+            qDebug() << "No playlists found!";
         }
     } else {
-        qDebug() << "handleTopPlaylistFinished" << reply->errorString();
+        qWarning() << "handleTopPlaylistFinished" << reply->errorString();
     }
 }
 

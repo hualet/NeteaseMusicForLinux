@@ -3,7 +3,8 @@ TEMPLATE = app
 QT += qml quick
 
 SOURCES += src/main.cpp \
-    src/netease_api/neteaseapi.cpp
+    src/netease_api/neteaseapi.cpp \
+    src/appcontroller.cpp
 
 RESOURCES += qml.qrc
 
@@ -14,4 +15,5 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    src/netease_api/neteaseapi.h
+    src/netease_api/neteaseapi.h \
+    src/appcontroller.h

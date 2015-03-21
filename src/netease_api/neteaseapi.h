@@ -13,11 +13,14 @@ class NeteaseAPI: public QObject
 {
     Q_OBJECT
 public:
-    NeteaseAPI();
+    NeteaseAPI(QObject *parent=0);
     ~NeteaseAPI();
 
     void login(QString &, QString &);
     void topPlaylist(QString category="全部", QString order="hot", quint8 offset=0, quint8 limit=50);
+
+signals:
+    void topPlaylistGot(QString playlists);
 
 private slots:
     void handleLoginFinished();
