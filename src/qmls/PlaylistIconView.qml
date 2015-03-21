@@ -41,9 +41,11 @@ GridView {
         }
     }
 
-    signal playlistClicked(string playlist)
+    signal playlistClicked(string playlistId)
 
     function setData(data) {
+        model.clear()
+
         var playlists = JSON.parse(data)
         playlists.forEach(function(playlist){
             model.append(playlist)

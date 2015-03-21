@@ -111,7 +111,6 @@ void NeteaseAPI::handlePlaylistDetailFinished()
 
     if (!reply->error()) {
         QByteArray array = reply->readAll();
-        qDebug() << array;
         QJsonDocument document = QJsonDocument::fromJson(array);
         QJsonObject object = document.object();
         QJsonObject result = object["result"].toObject();

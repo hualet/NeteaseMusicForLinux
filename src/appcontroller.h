@@ -12,7 +12,7 @@ public:
 
 signals:
     void topPlaylistsGot(QString playlists);
-    void playlistDetailGot(QString detail);
+    void playlistDetailGot(QString tracks);
 
 public slots:
     void getTopPlaylists();

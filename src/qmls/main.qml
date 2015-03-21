@@ -1,6 +1,7 @@
 import QtQuick 2.2
 import QtQuick.Window 2.1
 import QtQuick.Controls 1.0
+import QtMultimedia 5.0
 
 Window {
     visible: true
@@ -11,6 +12,8 @@ Window {
     Item {
         id: window_content
         anchors.fill: parent
+
+        Audio { id: player; autoPlay: true }
 
         Rectangle {
             id: background
@@ -41,6 +44,7 @@ Window {
 
                     HTTabView {
                         anchors.fill: parent
+                        visible: !songs_list_view.visible
 
                         Tab {
                             title: "推荐"
@@ -62,6 +66,11 @@ Window {
                                     }
 
                                     Component.onCompleted: _controller.getTopPlaylists()
+
+                                    onPlaylistClicked: {
+                                        print(playlistId)
+                                        _controller.getPlaylistDetail(playlistId)
+                                    }
                                 }
                             }
                         }
@@ -74,6 +83,22 @@ Window {
                         Tab {
                             title: "最新音乐"
                         }
+                    }
+
+                    SongsListView {
+                        id: songs_list_view
+                        visible: false
+                        anchors.fill: parent
+
+                        Connections {
+                            target: _controller
+                            onPlaylistDetailGot: {
+                                songs_list_view.setData(tracks)
+                                songs_list_view.visible = true
+                            }
+                        }
+
+                        onSongClicked: player.source = mp3Url
                     }
                 }
             }

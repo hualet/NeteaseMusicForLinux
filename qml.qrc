@@ -8,5 +8,6 @@
         <file>src/qmls/HSep.qml</file>
         <file>src/qmls/VSep.qml</file>
         <file>src/qmls/HTTabContent.qml</file>
+        <file>src/qmls/SongsListView.qml</file>
     </qresource>
 </RCC>
