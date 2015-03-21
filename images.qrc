@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/next_hover_pressed.png</file>
+        <file>images/next_normal.png</file>
+        <file>images/pause_hover_pressed.png</file>
+        <file>images/pause_normal.png</file>
+        <file>images/play_hover_pressed.png</file>
+        <file>images/play_normal.png</file>
+        <file>images/prev_hover_pressed.png</file>
+        <file>images/prev_normal.png</file>
+        <file>src/qmls/HTProgressBar.qml</file>
+    </qresource>
+</RCC>

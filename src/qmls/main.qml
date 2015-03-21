@@ -3,6 +3,8 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.0
 import QtMultimedia 5.0
 
+import "qrc:/src/qmls/utils.js" as Utils
+
 Window {
     visible: true
     width: 1000
@@ -106,6 +108,10 @@ Window {
             Footer {
                 id: footer
                 width: parent.width
+
+                playing: player.playbackState == Audio.PlayingState
+                progress: player.position / player.duration
+                timeInfo: "%1/%2".arg(Utils.formatTime(player.position)).arg(Utils.formatTime(player.duration))
             }
         }
     }

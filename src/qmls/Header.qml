@@ -5,9 +5,13 @@ Item {
     height: 70
 
     Rectangle {
-        color: "red"
         anchors.fill: parent
+        color: "red"
+    }
 
+    Rectangle {
+        anchors.fill: parent
+        color: Qt.rgba(0, 0, 0, 0.1)
     }
 }
 
