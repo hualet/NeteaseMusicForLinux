@@ -8,6 +8,10 @@ Item {
     property alias playing: play_pause_button.playing
     property alias progress: progress_bar.progress
     property alias timeInfo: time_info.text
+    property alias volume: volume_button.volume
+    property alias muted: volume_button.muted
+
+    signal mutedSet(bool muted)
 
     Rectangle {
         anchors.fill: parent
@@ -65,5 +69,14 @@ Item {
         anchors.left: progress_bar.right
         anchors.leftMargin: 10
         anchors.verticalCenter: parent.verticalCenter
+    }
+
+    HTVolumeButton {
+        id: volume_button
+        anchors.left: time_info.right
+        anchors.leftMargin: 20
+        anchors.verticalCenter: parent.verticalCenter
+
+        onMutedSet: root.mutedSet(muted)
     }
 }

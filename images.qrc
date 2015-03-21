@@ -8,6 +8,9 @@
         <file>images/play_normal.png</file>
         <file>images/prev_hover_pressed.png</file>
         <file>images/prev_normal.png</file>
-        <file>src/qmls/HTProgressBar.qml</file>
+        <file>images/muted_hover_pressed.png</file>
+        <file>images/muted_normal.png</file>
+        <file>images/volume_hover_pressed.png</file>
+        <file>images/volume_normal.png</file>
     </qresource>
 </RCC>

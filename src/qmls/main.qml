@@ -15,7 +15,7 @@ Window {
         id: window_content
         anchors.fill: parent
 
-        Audio { id: player; autoPlay: true }
+        Audio { id: player; autoPlay: true; volume: 0.8 }
 
         Rectangle {
             id: background
@@ -112,6 +112,10 @@ Window {
                 playing: player.playbackState == Audio.PlayingState
                 progress: player.position / player.duration
                 timeInfo: "%1/%2".arg(Utils.formatTime(player.position)).arg(Utils.formatTime(player.duration))
+                volume: player.volume
+                muted: player.muted
+
+                onMutedSet: player.muted = muted
             }
         }
     }
