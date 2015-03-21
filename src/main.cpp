@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     QString username("");
     QString password("");
     api.login(username, password);
+    api.topPlaylist();
 
     return app.exec();
 }
