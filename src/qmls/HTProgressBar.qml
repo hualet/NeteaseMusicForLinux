@@ -21,6 +21,12 @@ Item {
             height: parent.height
             color: "red"
             radius: height / 2
+
+            Rectangle {
+                anchors.fill: parent
+                radius: parent.radius
+                color: Qt.rgba(1, 1, 1, 0.2)
+            }
         }
 
         Rectangle {

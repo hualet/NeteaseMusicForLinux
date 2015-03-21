@@ -10,6 +10,7 @@ Window {
     width: 1000
     height: 640
     color: "transparent"
+    title: " "
 
     Item {
         id: window_content
@@ -33,6 +34,7 @@ Window {
             }
 
             Row {
+                clip: true
                 width: parent.width
                 height: parent.height - header.height - footer.height
 
@@ -70,7 +72,6 @@ Window {
                                     Component.onCompleted: _controller.getTopPlaylists()
 
                                     onPlaylistClicked: {
-                                        print(playlistId)
                                         _controller.getPlaylistDetail(playlistId)
                                     }
                                 }
