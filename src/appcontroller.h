@@ -13,10 +13,12 @@ public:
 signals:
     void topPlaylistsGot(QString playlists);
     void playlistDetailGot(QString tracks);
+    void rankingListsGot(QString lists);
 
 public slots:
     void getTopPlaylists();
     void getPlaylistDetail(QString);
+    void getRankingLists();
 
 private:
     NeteaseAPI* m_api;

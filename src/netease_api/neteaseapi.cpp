@@ -67,6 +67,16 @@ void NeteaseAPI::playlistDetail(QString playlistId)
     connect(reply, &QNetworkReply::finished, this, &NeteaseAPI::handlePlaylistDetailFinished);
 }
 
+void NeteaseAPI::rankingLists()
+{
+    QUrl url = QString("http://music.163.com/api/toplist");
+    QUrlQuery query;
+    url.setQuery(query.toString(QUrl::FullyEncoded));
+
+    QNetworkReply* reply = get(url);
+    connect(reply, &QNetworkReply::finished, this, &NeteaseAPI::handleRankingListsFinished);
+}
+
 // slots
 void NeteaseAPI::handleLoginFinished()
 {
@@ -124,6 +134,27 @@ void NeteaseAPI::handlePlaylistDetailFinished()
         }
     } else {
         qWarning() << "handlePlaylistDetailFinished" << reply->errorString();
+    }
+}
+
+void NeteaseAPI::handleRankingListsFinished()
+{
+    QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
+
+    if (!reply->error()) {
+        QByteArray array = reply->readAll();
+        QJsonDocument document = QJsonDocument::fromJson(array);
+        QJsonObject object = document.object();
+        QJsonArray list = object["list"].toArray();
+
+        if (!list.isEmpty()) {
+            QJsonDocument document(list);
+            emit rankingListsGot(QString(document.toJson()));
+        } else {
+            qDebug() << "No ranking list found!";
+        }
+    } else {
+        qWarning() << "handleRankingListsFinished" << reply->errorString();
     }
 }
 

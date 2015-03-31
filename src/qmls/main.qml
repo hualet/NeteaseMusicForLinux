@@ -79,6 +79,30 @@ Window {
                         }
                         Tab {
                             title: "排行榜"
+
+                            HTTabContent {
+                                width: parent.width
+                                height: parent.height
+
+                                PlaylistIconView {
+                                    id: toplist_icon_view
+                                    width: cellWidth * 4
+                                    height: parent.height
+
+                                    anchors.horizontalCenter: parent.horizontalCenter
+
+                                    Connections {
+                                        target: _controller
+                                        onRankingListsGot: toplist_icon_view.setData(lists)
+                                    }
+
+                                    Component.onCompleted: _controller.getRankingLists()
+
+                                    onPlaylistClicked: {
+                                        _controller.getPlaylistDetail(playlistId)
+                                    }
+                                }
+                            }
                         }
                         Tab {
                             title: "歌单"

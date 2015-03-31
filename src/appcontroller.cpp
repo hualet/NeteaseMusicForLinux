@@ -6,6 +6,7 @@ AppController::AppController(QObject *parent) :
     m_api = new NeteaseAPI(this);
     connect(m_api, &NeteaseAPI::topPlaylistGot, this, &AppController::topPlaylistsGot);
     connect(m_api, &NeteaseAPI::playlistDetailGot, this, &AppController::playlistDetailGot);
+    connect(m_api, &NeteaseAPI::rankingListsGot, this, &AppController::rankingListsGot);
 }
 
 void AppController::getTopPlaylists()
@@ -16,4 +17,9 @@ void AppController::getTopPlaylists()
 void AppController::getPlaylistDetail(QString playlistId)
 {
     m_api->playlistDetail(playlistId);
+}
+
+void AppController::getRankingLists()
+{
+    m_api->rankingLists();
 }
