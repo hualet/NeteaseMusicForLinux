@@ -20,17 +20,20 @@ public:
     void topPlaylist(QString category="全部", QString order="hot", quint8 offset=0, quint8 limit=50);
     void playlistDetail(QString);
     void rankingLists();
+    void getLyric(QString);
 
 signals:
     void topPlaylistGot(QString playlists);
     void playlistDetailGot(QString detail);
     void rankingListsGot(QString lists);
+    void lyricGot(QString lyric);
 
 private slots:
     void handleLoginFinished();
     void handleTopPlaylistFinished();
     void handlePlaylistDetailFinished();
     void handleRankingListsFinished();
+    void handleGetLyricFinished();
 
 private:
     QNetworkAccessManager *m_networkManager;

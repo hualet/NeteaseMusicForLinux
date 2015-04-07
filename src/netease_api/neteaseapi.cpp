@@ -77,6 +77,21 @@ void NeteaseAPI::rankingLists()
     connect(reply, &QNetworkReply::finished, this, &NeteaseAPI::handleRankingListsFinished);
 }
 
+void NeteaseAPI::getLyric(QString songId)
+{
+    QUrl url = QString("http://music.163.com/api/song/lyric");
+    QUrlQuery query;
+    query.addQueryItem("os", "osx");
+    query.addQueryItem("id", songId);
+    query.addQueryItem("lv", "-1");
+    query.addQueryItem("kv", "-1");
+    query.addQueryItem("tv", "-1");
+    url.setQuery(query.toString(QUrl::FullyEncoded));
+
+    QNetworkReply* reply = get(url);
+    connect(reply, &QNetworkReply::finished, this, &NeteaseAPI::handleGetLyricFinished);
+}
+
 // slots
 void NeteaseAPI::handleLoginFinished()
 {
@@ -155,6 +170,26 @@ void NeteaseAPI::handleRankingListsFinished()
         }
     } else {
         qWarning() << "handleRankingListsFinished" << reply->errorString();
+    }
+}
+
+void NeteaseAPI::handleGetLyricFinished()
+{
+    QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
+
+    if (!reply->error()) {
+        QByteArray array = reply->readAll();
+        QJsonDocument document = QJsonDocument::fromJson(array);
+        QJsonObject object = document.object();
+        QJsonObject lrc = object["lrc"].toObject();
+
+        if (!lrc.isEmpty()) {
+            emit rankingListsGot(lrc["lyric"].toString());
+        } else {
+            qDebug() << "No lyric found!";
+        }
+    } else {
+        qWarning() << "handleGetLyricFinished" << reply->errorString();
     }
 }
 
