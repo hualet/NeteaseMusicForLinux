@@ -11,12 +11,12 @@
         <file>src/qmls/SongsListView.qml</file>
         <file>src/qmls/HTImageButton.qml</file>
         <file>src/qmls/utils.js</file>
-        <file>src/qmls/HTProgressBar.qml</file>
         <file>src/qmls/HTVolumeButton.qml</file>
         <file>src/qmls/widgets/RunningDisc.qml</file>
         <file>src/qmls/PlayView.qml</file>
         <file>src/qmls/SideBar.qml</file>
         <file>src/qmls/MainController.qml</file>
         <file>src/qmls/SongStruct.qml</file>
+        <file>src/qmls/widgets/HTProgressBar.qml</file>
     </qresource>
 </RCC>

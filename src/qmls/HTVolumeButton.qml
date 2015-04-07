@@ -1,5 +1,7 @@
 import QtQuick 2.0
 
+import "../qmls/widgets"
+
 Item {
     id: root
     width: volume_icon.width + volume_bar.width
@@ -9,6 +11,7 @@ Item {
     property alias volume: volume_bar.progress
 
     signal mutedSet(bool muted)
+    signal volumeSet(real volume)
 
     HTImageButton {
         id: volume_icon
@@ -26,5 +29,7 @@ Item {
         anchors.left: volume_icon.right
         anchors.leftMargin: 5
         anchors.verticalCenter: parent.verticalCenter
+
+        onSeek: root.volumeSet(progress)
     }
 }

@@ -156,6 +156,10 @@ Window {
                 muted: player.muted
 
                 onMutedSet: player.muted = muted
+                onPlay: player.play()
+                onPause: player.pause()
+                onVolumeSet: player.volume = volume
+                onSeek: player.seek(player.duration * progress)
             }
         }
 

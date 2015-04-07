@@ -1,5 +1,7 @@
 import QtQuick 2.0
 
+import "../qmls/widgets"
+
 Item {
     id: root
     width: 100
@@ -12,6 +14,10 @@ Item {
     property alias muted: volume_button.muted
 
     signal mutedSet(bool muted)
+    signal play()
+    signal pause()
+    signal seek(real progress)
+    signal volumeSet(real volume)
 
     Rectangle {
         anchors.fill: parent
@@ -45,6 +51,8 @@ Item {
             property bool playing: false
 
             anchors.verticalCenter: parent.verticalCenter
+
+            onClicked: playing ? root.pause() : root.play()
         }
 
         HTImageButton {
@@ -61,6 +69,8 @@ Item {
         anchors.left: button_row.right
         anchors.leftMargin: 30
         anchors.verticalCenter: parent.verticalCenter
+
+        onSeek: root.seek(progress)
     }
 
     Text {
@@ -78,5 +88,6 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
 
         onMutedSet: root.mutedSet(muted)
+        onVolumeSet: root.volumeSet(volume)
     }
 }
