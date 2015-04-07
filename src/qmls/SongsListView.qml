@@ -78,7 +78,15 @@ ListView {
         MouseArea {
             anchors.fill: parent
             onClicked: list_view.currentIndex = index
-            onDoubleClicked: songClicked(mp3Url)
+            onDoubleClicked: {
+                var song = {}
+                song.id = id
+                song.name = name
+                song.artist = artists.get(0).name
+                song.mp3Url = mp3Url
+                song.picUrl = album.picUrl
+                list_view.songClicked(song)
+            }
         }
     }
 
@@ -102,7 +110,7 @@ ListView {
         HSep { width: parent.width; anchors.bottom: parent.bottom }
     }
 
-    signal songClicked(string mp3Url)
+    signal songClicked(var song)
 
     function setData(data) {
         model.clear()

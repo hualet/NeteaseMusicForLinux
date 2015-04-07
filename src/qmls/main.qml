@@ -16,7 +16,18 @@ Window {
         id: window_content
         anchors.fill: parent
 
-        Audio { id: player; autoPlay: true; volume: 0.8 }
+        Audio { id: player; autoPlay: true; volume: 0.8; source: current_song.mp3Url }
+
+        SongStruct { id: current_song }
+
+        MainController { id: main_controller }
+
+        Connections {
+            target: _controller
+            onLyricGot: {
+                print("xxxxx", lyric)
+            }
+        }
 
         Rectangle {
             id: background
@@ -38,7 +49,11 @@ Window {
                 width: parent.width
                 height: parent.height - header.height - footer.height
 
-                Item { id: side_bar; width: 200; height: parent.height }
+                SideBar {
+                    id: side_bar
+                    width: 200
+                    height: parent.height
+                }
 
                 VSep { height: parent.height }
 
@@ -125,7 +140,7 @@ Window {
                             }
                         }
 
-                        onSongClicked: player.source = mp3Url
+                        onSongClicked: main_controller.playSong(song)
                     }
                 }
             }
@@ -141,6 +156,23 @@ Window {
                 muted: player.muted
 
                 onMutedSet: player.muted = muted
+            }
+        }
+
+        Item {
+            id: floats
+            y: header.height
+            width: parent.width
+            height: parent.height - header.height - footer.height
+
+            PlayView {
+                width: state == "mini" ? side_bar.width : parent.width
+                height: state == "mini" ? 80 : parent.height
+                picUrl: current_song.picUrl
+                artist: current_song.artist
+                song: current_song.name
+
+                anchors.bottom: parent.bottom
             }
         }
     }

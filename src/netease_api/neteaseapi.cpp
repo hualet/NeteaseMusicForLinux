@@ -184,7 +184,7 @@ void NeteaseAPI::handleGetLyricFinished()
         QJsonObject lrc = object["lrc"].toObject();
 
         if (!lrc.isEmpty()) {
-            emit rankingListsGot(lrc["lyric"].toString());
+            emit lyricGot(lrc["lyric"].toString());
         } else {
             qDebug() << "No lyric found!";
         }
