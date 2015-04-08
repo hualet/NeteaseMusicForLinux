@@ -48,6 +48,7 @@ GridView {
 
         var playlists = JSON.parse(data)
         playlists.forEach(function(playlist){
+            if (!playlist["coverImgUrl"]) playlist["coverImgUrl"] = playlist["picUrl"]
             model.append(playlist)
         })
     }

@@ -73,7 +73,7 @@ Window {
                                 height: parent.height
 
                                 PlaylistIconView {
-                                    id: icon_view
+                                    id: hotspot_icon_view
                                     width: cellWidth * 4
                                     height: parent.height
 
@@ -81,10 +81,10 @@ Window {
 
                                     Connections {
                                         target: _controller
-                                        onTopPlaylistsGot: icon_view.setData(playlists)
+                                        onHotspotGot: hotspot_icon_view.setData(hotspot)
                                     }
 
-                                    Component.onCompleted: _controller.getTopPlaylists()
+                                    Component.onCompleted: _controller.getHotspot()
 
                                     onPlaylistClicked: {
                                         _controller.getPlaylistDetail(playlistId)
@@ -121,6 +121,25 @@ Window {
                         }
                         Tab {
                             title: "歌单"
+
+                            PlaylistIconView {
+                                id: playlists_icon_view
+                                width: cellWidth * 4
+                                height: parent.height
+
+                                anchors.horizontalCenter: parent.horizontalCenter
+
+                                Connections {
+                                    target: _controller
+                                    onTopPlaylistsGot: playlists_icon_view.setData(playlists)
+                                }
+
+                                Component.onCompleted: _controller.getTopPlaylists()
+
+                                onPlaylistClicked: {
+                                    _controller.getPlaylistDetail(playlistId)
+                                }
+                            }
                         }
                         Tab {
                             title: "最新音乐"

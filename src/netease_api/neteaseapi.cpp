@@ -92,6 +92,17 @@ void NeteaseAPI::getLyric(QString songId)
     connect(reply, &QNetworkReply::finished, this, &NeteaseAPI::handleGetLyricFinished);
 }
 
+void NeteaseAPI::hotspot()
+{
+    QUrl url = QString("http://music.163.com/api/discovery/hotspot");
+    QUrlQuery query;
+    query.addQueryItem("limit", "12");
+    url.setQuery(query.toString(QUrl::FullyEncoded));
+
+    QNetworkReply* reply = get(url);
+    connect(reply, &QNetworkReply::finished, this, &NeteaseAPI::handleHotspotFinished);
+}
+
 // slots
 void NeteaseAPI::handleLoginFinished()
 {
@@ -190,6 +201,27 @@ void NeteaseAPI::handleGetLyricFinished()
         }
     } else {
         qWarning() << "handleGetLyricFinished" << reply->errorString();
+    }
+}
+
+void NeteaseAPI::handleHotspotFinished()
+{
+    QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
+
+    if (!reply->error()) {
+        QByteArray array = reply->readAll();
+        QJsonDocument document = QJsonDocument::fromJson(array);
+        QJsonObject object = document.object();
+        QJsonArray playlists = object["data"].toArray();
+
+        if (!playlists.isEmpty()) {
+            QJsonDocument document(playlists);
+            emit hotspotGot(QString(document.toJson()));
+        } else {
+            qDebug() << "No hotspot found!";
+        }
+    } else {
+        qWarning() << "handleHotspotFinished" << reply->errorString();
     }
 }
 

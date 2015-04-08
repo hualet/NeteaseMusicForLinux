@@ -21,12 +21,14 @@ public:
     void playlistDetail(QString);
     void rankingLists();
     void getLyric(QString);
+    void hotspot();
 
 signals:
     void topPlaylistGot(QString playlists);
     void playlistDetailGot(QString detail);
     void rankingListsGot(QString lists);
     void lyricGot(QString lyric);
+    void hotspotGot(QString hotspot);
 
 private slots:
     void handleLoginFinished();
@@ -34,6 +36,7 @@ private slots:
     void handlePlaylistDetailFinished();
     void handleRankingListsFinished();
     void handleGetLyricFinished();
+    void handleHotspotFinished();
 
 private:
     QNetworkAccessManager *m_networkManager;

@@ -15,12 +15,14 @@ signals:
     void playlistDetailGot(QString tracks);
     void rankingListsGot(QString lists);
     void lyricGot(QString lyric);
+    void hotspotGot(QString hotspot);
 
 public slots:
     void getTopPlaylists();
     void getPlaylistDetail(QString);
     void getRankingLists();
     void getLyric(QString);
+    void getHotspot();
 
 private:
     NeteaseAPI* m_api;
