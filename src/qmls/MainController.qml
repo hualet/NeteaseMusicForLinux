@@ -6,6 +6,7 @@ Item {
         current_song.picUrl = song.picUrl
         current_song.artist = song.artist
         current_song.name = song.name
+        current_song.album = song.album
 
         _controller.getLyric(song.id)
     }

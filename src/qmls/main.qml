@@ -25,7 +25,7 @@ Window {
         Connections {
             target: _controller
             onLyricGot: {
-                print("xxxxx", lyric)
+                current_song.lyric = lyric
             }
         }
 
@@ -175,6 +175,9 @@ Window {
                 picUrl: current_song.picUrl
                 artist: current_song.artist
                 song: current_song.name
+                album: current_song.album
+                lyric: current_song.lyric
+                position: player.position
 
                 anchors.bottom: parent.bottom
             }

@@ -6,5 +6,6 @@ QtObject {
     property string artist
     property string name
     property string lyric
+    property string album
 }
 

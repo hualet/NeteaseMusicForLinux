@@ -11,7 +11,13 @@ Item {
 
     property url picUrl
     property string artist
+    property string album
     property string song
+    property string lyric
+    property int position
+
+    onLyricChanged: lyric_view.setLyric(lyric)
+    onPositionChanged: lyric_view.setPosition(position)
 
     states: [
         State {
@@ -105,7 +111,13 @@ Item {
             anchors.fill: parent
         }
 
+        Rectangle {
+            anchors.fill: background_image
+            color: "white"
+        }
+
         FastBlur {
+            opacity: 0.5
             anchors.fill: background_image
             source: background_image
             radius: 64
@@ -113,13 +125,61 @@ Item {
 
         Rectangle {
             anchors.fill: background_image
-            color: Qt.rgba(1, 1, 1, 0.8)
+            color: Qt.rgba(0.5, 0.5, 0.5, 0.4)
         }
 
         Row {
+            id: detail_row
+            width: parent.width
             height: parent.height
 
-            RunningDisc { picUrl: root.picUrl }
+            RunningDisc { id: disc; width: parent.width / 2; picUrl: root.picUrl }
+
+            Column {
+                id: detail_column
+                spacing: 5
+                width: parent.width / 2
+                height: parent.height
+
+                Column {
+                    spacing: 5
+                    width: parent.width
+                    height: childrenRect.height
+
+                    Item {
+                        width: parent.width
+                        height: 60
+
+                        Text {
+                            text: root.song
+                            font.pixelSize: 20
+
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                    Row {
+                        spacing: 20
+
+                        Text {
+                            text: "专辑: " + root.album
+                        }
+                        Text {
+                            text: "歌手: " + root.artist
+                        }
+                    }
+                }
+
+                HSep { width: detail_column.width * 3 / 4 }
+
+                Item { width: detail_column.width; height: 20 }
+
+                HTLyricView {
+                    id: lyric_view
+                    width: detail_column.width
+                    height: 300
+                }
+            }
         }
     }
 }

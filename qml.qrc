@@ -18,5 +18,6 @@
         <file>src/qmls/MainController.qml</file>
         <file>src/qmls/SongStruct.qml</file>
         <file>src/qmls/widgets/HTProgressBar.qml</file>
+        <file>src/qmls/widgets/HTLyricView.qml</file>
     </qresource>
 </RCC>

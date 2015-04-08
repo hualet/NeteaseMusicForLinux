@@ -82,6 +82,7 @@ ListView {
                 var song = {}
                 song.id = id
                 song.name = name
+                song.album = album["name"]
                 song.artist = artists.get(0).name
                 song.mp3Url = mp3Url
                 song.picUrl = album.picUrl
