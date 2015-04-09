@@ -9,6 +9,7 @@ AppController::AppController(QObject *parent) :
     connect(m_api, &NeteaseAPI::rankingListsGot, this, &AppController::rankingListsGot);
     connect(m_api, &NeteaseAPI::lyricGot, this, &AppController::lyricGot);
     connect(m_api, &NeteaseAPI::hotspotGot, this, &AppController::hotspotGot);
+    connect(m_api, &NeteaseAPI::bannersGot, this, &AppController::bannersGot);
 }
 
 void AppController::getTopPlaylists()
@@ -34,4 +35,9 @@ void AppController::getLyric(QString songId)
 void AppController::getHotspot()
 {
     m_api->hotspot();
+}
+
+void AppController::getBanners()
+{
+    m_api->getBanners();
 }

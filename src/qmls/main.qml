@@ -3,6 +3,7 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.0
 import QtMultimedia 5.0
 
+import "../qmls/widgets"
 import "qrc:/src/qmls/utils.js" as Utils
 
 Window {
@@ -72,22 +73,39 @@ Window {
                                 width: parent.width
                                 height: parent.height
 
-                                PlaylistIconView {
-                                    id: hotspot_icon_view
-                                    width: cellWidth * 4
-                                    height: parent.height
+                                Column {
+                                    width: parent.width
 
-                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    HTBannersView {
+                                        id: banners_view
 
-                                    Connections {
-                                        target: _controller
-                                        onHotspotGot: hotspot_icon_view.setData(hotspot)
+                                        anchors.horizontalCenter: parent.horizontalCenter
+
+                                        Connections {
+                                            target: _controller
+                                            onBannersGot: banners_view.setData(banners)
+                                        }
+
+                                        Component.onCompleted: _controller.getBanners()
                                     }
 
-                                    Component.onCompleted: _controller.getHotspot()
+                                    PlaylistIconView {
+                                        id: hotspot_icon_view
+                                        width: cellWidth * 4
+                                        height: parent.height
 
-                                    onPlaylistClicked: {
-                                        _controller.getPlaylistDetail(playlistId)
+                                        anchors.horizontalCenter: parent.horizontalCenter
+
+                                        Connections {
+                                            target: _controller
+                                            onHotspotGot: hotspot_icon_view.setData(hotspot)
+                                        }
+
+                                        Component.onCompleted: _controller.getHotspot()
+
+                                        onPlaylistClicked: {
+                                            _controller.getPlaylistDetail(playlistId)
+                                        }
                                     }
                                 }
                             }

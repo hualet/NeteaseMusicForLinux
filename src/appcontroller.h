@@ -16,6 +16,7 @@ signals:
     void rankingListsGot(QString lists);
     void lyricGot(QString lyric);
     void hotspotGot(QString hotspot);
+    void bannersGot(QString banners);
 
 public slots:
     void getTopPlaylists();
@@ -23,6 +24,7 @@ public slots:
     void getRankingLists();
     void getLyric(QString);
     void getHotspot();
+    void getBanners();
 
 private:
     NeteaseAPI* m_api;

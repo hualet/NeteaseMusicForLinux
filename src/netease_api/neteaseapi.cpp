@@ -103,6 +103,17 @@ void NeteaseAPI::hotspot()
     connect(reply, &QNetworkReply::finished, this, &NeteaseAPI::handleHotspotFinished);
 }
 
+void NeteaseAPI::getBanners()
+{
+    QUrl url = QString("http://music.163.com/api/banner/get");
+    QUrlQuery query;
+    query.addQueryItem("limit", "8");
+    url.setQuery(query.toString(QUrl::FullyEncoded));
+
+    QNetworkReply* reply = get(url);
+    connect(reply, &QNetworkReply::finished, this, &NeteaseAPI::handleGetBannersFinished);
+}
+
 // slots
 void NeteaseAPI::handleLoginFinished()
 {
@@ -222,6 +233,27 @@ void NeteaseAPI::handleHotspotFinished()
         }
     } else {
         qWarning() << "handleHotspotFinished" << reply->errorString();
+    }
+}
+
+void NeteaseAPI::handleGetBannersFinished()
+{
+    QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
+
+    if (!reply->error()) {
+        QByteArray array = reply->readAll();
+        QJsonDocument document = QJsonDocument::fromJson(array);
+        QJsonObject object = document.object();
+        QJsonArray banners = object["banners"].toArray();
+
+        if (!banners.isEmpty()) {
+            QJsonDocument document(banners);
+            emit bannersGot(QString(document.toJson()));
+        } else {
+            qDebug() << "No banners found!";
+        }
+    } else {
+        qWarning() << "handleGetBannersFinished" << reply->errorString();
     }
 }
 
