@@ -16,7 +16,6 @@
         <file>src/qmls/PlayView.qml</file>
         <file>src/qmls/SideBar.qml</file>
         <file>src/qmls/MainController.qml</file>
-        <file>src/qmls/SongStruct.qml</file>
         <file>src/qmls/widgets/HTProgressBar.qml</file>
         <file>src/qmls/widgets/HTLyricView.qml</file>
         <file>src/qmls/widgets/HTBannersView.qml</file>

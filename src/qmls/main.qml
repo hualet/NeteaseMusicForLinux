@@ -3,6 +3,8 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.0
 import QtMultimedia 5.0
 
+import Org.Hualet.Widgets 1.0
+
 import "../qmls/widgets"
 import "qrc:/src/qmls/utils.js" as Utils
 
@@ -19,7 +21,7 @@ Window {
 
         Audio { id: player; autoPlay: true; volume: 0.8; source: current_song.mp3Url }
 
-        SongStruct { id: current_song }
+        Song { id: current_song }
 
         MainController { id: main_controller }
 

@@ -4,7 +4,8 @@ QT += qml quick
 
 SOURCES += src/main.cpp \
     src/netease_api/neteaseapi.cpp \
-    src/appcontroller.cpp
+    src/appcontroller.cpp \
+    src/song.cpp
 
 RESOURCES += qml.qrc \
     images.qrc
@@ -17,4 +18,5 @@ include(deployment.pri)
 
 HEADERS += \
     src/netease_api/neteaseapi.h \
-    src/appcontroller.h
+    src/appcontroller.h \
+    src/song.h

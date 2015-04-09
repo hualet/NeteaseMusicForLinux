@@ -54,7 +54,7 @@ Item {
     Image {
         x: 250
         y: -5
-        transformOrigin: Item.topLeft
+        transformOrigin: Item.TopLeft
 //        rotation: root.playing ? 0 : 30
         source: "qrc:/images/disc_needle.png"
     }
