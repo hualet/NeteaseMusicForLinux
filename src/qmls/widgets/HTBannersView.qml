@@ -19,8 +19,6 @@ PathView {
         source: pic
         transform: Rotation { origin.x: rotationOriginX; axis { x: 0; y: 1; z: 0 } angle: rotationAngle }
 
-        Component.onCompleted: print(pic)
-
         property real rotationOriginX: PathView.itemX < 0 ? 0 : path_view.itemWidth
         property real rotationAngle: PathView.itemX < 0 ? 10 : PathView.itemX > 0 ? -10 : 0
 

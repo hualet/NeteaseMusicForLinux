@@ -73,39 +73,36 @@ Window {
                                 width: parent.width
                                 height: parent.height
 
-                                Column {
-                                    width: parent.width
+                                HTBannersView {
+                                    id: banners_view
 
-                                    HTBannersView {
-                                        id: banners_view
+                                    anchors.horizontalCenter: parent.horizontalCenter
 
-                                        anchors.horizontalCenter: parent.horizontalCenter
-
-                                        Connections {
-                                            target: _controller
-                                            onBannersGot: banners_view.setData(banners)
-                                        }
-
-                                        Component.onCompleted: _controller.getBanners()
+                                    Connections {
+                                        target: _controller
+                                        onBannersGot: banners_view.setData(banners)
                                     }
 
-                                    PlaylistIconView {
-                                        id: hotspot_icon_view
-                                        width: cellWidth * 4
-                                        height: parent.height
+                                    Component.onCompleted: _controller.getBanners()
+                                }
 
-                                        anchors.horizontalCenter: parent.horizontalCenter
+                                PlaylistIconView {
+                                    id: hotspot_icon_view
+                                    width: cellWidth * 4
+                                    height: parent.height
 
-                                        Connections {
-                                            target: _controller
-                                            onHotspotGot: hotspot_icon_view.setData(hotspot)
-                                        }
+                                    anchors.top: banners_view.bottom
+                                    anchors.horizontalCenter: parent.horizontalCenter
 
-                                        Component.onCompleted: _controller.getHotspot()
+                                    Connections {
+                                        target: _controller
+                                        onHotspotGot: hotspot_icon_view.setData(hotspot)
+                                    }
 
-                                        onPlaylistClicked: {
-                                            _controller.getPlaylistDetail(playlistId)
-                                        }
+                                    Component.onCompleted: _controller.getHotspot()
+
+                                    onPlaylistClicked: {
+                                        _controller.getPlaylistDetail(playlistId)
                                     }
                                 }
                             }
