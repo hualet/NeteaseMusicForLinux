@@ -12,5 +12,9 @@
         <file>images/muted_normal.png</file>
         <file>images/volume_hover_pressed.png</file>
         <file>images/volume_normal.png</file>
+        <file>images/disc_disc.png</file>
+        <file>images/disc_mask.png</file>
+        <file>images/disc_needle.png</file>
+        <file>images/cancel_fullscreen.png</file>
     </qresource>
 </RCC>

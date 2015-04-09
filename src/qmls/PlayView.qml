@@ -15,9 +15,18 @@ Item {
     property string song
     property string lyric
     property int position
+    property alias playing: disc.playing
 
     onLyricChanged: lyric_view.setLyric(lyric)
     onPositionChanged: lyric_view.setPosition(position)
+
+    Behavior on width {
+        SmoothedAnimation { duration: 300 }
+    }
+
+    Behavior on height {
+        SmoothedAnimation { duration: 300 }
+    }
 
     states: [
         State {
@@ -180,6 +189,17 @@ Item {
                     height: 300
                 }
             }
+        }
+
+        HTImageButton {
+            normalImage: "qrc:/images/cancel_fullscreen.png"
+            hoverPressedImage: "qrc:/images/cancel_fullscreen.png"
+            onClicked: root.state = "mini"
+
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.topMargin: 10
+            anchors.rightMargin: 10
         }
     }
 }
