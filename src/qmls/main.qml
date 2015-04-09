@@ -215,7 +215,9 @@ Window {
                 album: current_song.album
                 lyric: current_song.lyric
                 position: player.position
+                playing: player.playbackState == Audio.PlayingState
 
+                anchors.left: parent.left
                 anchors.bottom: parent.bottom
             }
         }

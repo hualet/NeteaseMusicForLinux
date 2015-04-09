@@ -2,22 +2,34 @@ import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
 Item {
-    width: 300
-    height: 300
+    id: root
+    width: 335
+    height: 400
+    clip: true
 
+    property bool playing: false
     property alias picUrl: cover_image.source
+
+    Image {
+        id: disc_image
+        source: "qrc:/images/disc_disc.png"
+        anchors.centerIn: image_area
+    }
 
     Item {
         id: image_area
+        width: disc_image.implicitWidth
+        height: disc_image.implicitHeight
         visible: false
-        anchors.fill: parent
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
 
         Image { id: cover_image; width: 200; height: 200; anchors.centerIn: parent }
     }
 
     Item {
         id: mask
-        anchors.fill: parent
+        anchors.fill: image_area
 
         Rectangle {
             width: cover_image.width
@@ -34,12 +46,26 @@ Item {
         anchors.fill: image_area
     }
 
-    RotationAnimation {
+    Image {
+        source: "qrc:/images/disc_mask.png"
+        anchors.centerIn: image_area
+    }
+
+    Image {
+        x: 250
+        y: -5
+        transformOrigin: Item.topLeft
+//        rotation: root.playing ? 0 : 30
+        source: "qrc:/images/disc_needle.png"
+    }
+
+    PropertyAnimation {
+        property: "rotation"
         target: opacity_mask
         from: 0
         to: 360
-        duration: 10 * 1000
-        running: true
+        duration: 30 * 1000
+        running: root.playing
         loops: Animation.Infinite
     }
 }
