@@ -6,6 +6,7 @@ ListView {
     id: list_view
     width: 100
     height: 100
+    clip: true
     currentIndex: -1
 
     Component {
@@ -113,10 +114,9 @@ ListView {
 
     signal songClicked(var song)
 
-    function setData(data) {
+    function setData(tracks) {
         model.clear()
 
-        var tracks = JSON.parse(data)
         for (var i = 0; i < tracks.length; i++) {
             model.append(tracks[i])
         }

@@ -66,7 +66,7 @@ Window {
 
                     HTTabView {
                         anchors.fill: parent
-                        visible: !songs_list_view.visible
+                        visible: !playlist_detail_view.visible
 
                         Tab {
                             title: "推荐"
@@ -94,6 +94,7 @@ Window {
                                     height: parent.height
 
                                     anchors.top: banners_view.bottom
+                                    anchors.topMargin: 20
                                     anchors.horizontalCenter: parent.horizontalCenter
 
                                     Connections {
@@ -154,7 +155,7 @@ Window {
                                 Component.onCompleted: _controller.getTopPlaylists()
 
                                 onPlaylistClicked: {
-                                    _controller.getPlaylistDetail(playlistId)
+                                    playlist_detail_view.setPlaylist(playlistId)
                                 }
                             }
                         }
@@ -163,20 +164,32 @@ Window {
                         }
                     }
 
-                    SongsListView {
-                        id: songs_list_view
+                    PlaylistDetialView {
+                        id: playlist_detail_view
                         visible: false
                         anchors.fill: parent
 
                         Connections {
                             target: _controller
                             onPlaylistDetailGot: {
-                                songs_list_view.setData(tracks)
-                                songs_list_view.visible = true
+                                var result = JSON.parse(detail)
+
+                                playlist_detail_view.name = result.name
+                                playlist_detail_view.coverImgUrl = result.coverImgUrl
+                                playlist_detail_view.creator = result.creator.nickname
+                                playlist_detail_view.createTime = result.createTime
+                                playlist_detail_view.description = result.description
+                                playlist_detail_view.setData(result.tracks)
+
+                                playlist_detail_view.visible = true
                             }
                         }
 
                         onSongClicked: main_controller.playSong(song)
+
+                        function setPlaylist(playlistId) {
+                            _controller.getPlaylistDetail(playlistId)
+                        }
                     }
                 }
             }

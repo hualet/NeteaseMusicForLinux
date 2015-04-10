@@ -161,10 +161,9 @@ void NeteaseAPI::handlePlaylistDetailFinished()
         QJsonDocument document = QJsonDocument::fromJson(array);
         QJsonObject object = document.object();
         QJsonObject result = object["result"].toObject();
-        QJsonArray tracks = result["tracks"].toArray();
 
-        if (!tracks.isEmpty()) {
-            QJsonDocument document(tracks);
+        if (!result.isEmpty()) {
+            QJsonDocument document(result);
             emit playlistDetailGot(QString(document.toJson()));
         } else {
             qDebug() << "No detail found!";

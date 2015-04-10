@@ -19,5 +19,7 @@
         <file>src/qmls/widgets/HTProgressBar.qml</file>
         <file>src/qmls/widgets/HTLyricView.qml</file>
         <file>src/qmls/widgets/HTBannersView.qml</file>
+        <file>src/qmls/PlaylistDetialView.qml</file>
+        <file>src/qmls/widgets/HTTextButton.qml</file>
     </qresource>
 </RCC>

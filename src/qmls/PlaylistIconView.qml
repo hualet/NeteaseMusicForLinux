@@ -5,6 +5,7 @@ GridView {
     cellWidth: 190
     cellHeight: 190
     cacheBuffer: 8
+    clip: true
 
     model: ListModel {}
     delegate: Item {

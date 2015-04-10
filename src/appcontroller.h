@@ -12,7 +12,7 @@ public:
 
 signals:
     void topPlaylistsGot(QString playlists);
-    void playlistDetailGot(QString tracks);
+    void playlistDetailGot(QString detail);
     void rankingListsGot(QString lists);
     void lyricGot(QString lyric);
     void hotspotGot(QString hotspot);

@@ -11,6 +11,10 @@ function formatTime(millseconds) {
     return min + ':' + sec;
 }
 
+function unixTimeToReadable(time) {
+    return new Date(parseInt(time)).toLocaleDateString()
+}
+
 function parseLyric(lyric) {
     var result = {}
     var lines = lyric.split("\n")
