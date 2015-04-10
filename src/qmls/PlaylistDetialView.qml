@@ -8,6 +8,7 @@ Item {
     width: 500
     height: 500
 
+    property string id
     property url coverImgUrl
     property string name
     property string creator
@@ -15,7 +16,7 @@ Item {
     property string description
 
     signal songClicked(var song)
-    signal playAllClicked()
+    signal playAllClicked(string playlistId)
 
     function setData(data) { songs_list_view.setData(data) }
 
@@ -65,7 +66,7 @@ Item {
 
                 Item { width: parent.width; height: 10 }
 
-                HTTextButton { text: "播放全部"; onClicked: root.playAllClicked() }
+                HTTextButton { text: "播放全部"; onClicked: root.playAllClicked(root.id) }
 
                 Item { width: parent.width; height: 10 }
 

@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include "netease_api/neteaseapi.h"
+#include "playlist_model.h"
+#include "song.h"
 
 class AppController : public QObject
 {
@@ -26,8 +28,13 @@ public slots:
     void getHotspot();
     void getBanners();
 
+    void addPlaylistItem(QString id, QString name, QUrl mp3Url,
+                         QUrl picUrl, QString artist, QString album);
+    Song* getNextPlaylistItem(QString id);
+
 private:
     NeteaseAPI* m_api;
+    PlaylistModel* m_playlistModel;
 };
 
 #endif // APPCONTROLLER_H

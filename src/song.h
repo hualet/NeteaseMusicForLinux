@@ -9,6 +9,8 @@ class Song : public QObject
     Q_OBJECT
 public:
     explicit Song(QObject *parent = 0);
+    Song(QString& id, QString& name, QUrl& mp3Url, QUrl& picUrl,
+         QString& artist, QString& album, QObject *parent=0);
 
     Q_PROPERTY(QUrl mp3Url READ mp3Url WRITE setMp3Url NOTIFY mp3UrlChanged)
     Q_PROPERTY(QUrl picUrl READ picUrl WRITE setPicUrl NOTIFY picUrlChanged)
@@ -49,13 +51,13 @@ signals:
     void lyricChanged();
 
 private:
-    QString _id;
-    QUrl _mp3Url;
-    QUrl _picUrl;
-    QString _artist;
-    QString _name;
-    QString _album;
-    QString _lyric;
+    QString m_id;
+    QString m_name;
+    QUrl m_mp3Url;
+    QUrl m_picUrl;
+    QString m_artist;
+    QString m_album;
+    QString m_lyric;
 };
 
 #endif // SONG_H

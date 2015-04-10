@@ -19,7 +19,18 @@ Window {
         id: window_content
         anchors.fill: parent
 
-        Audio { id: player; autoPlay: true; volume: 0.8; source: current_song.mp3Url }
+        Audio {
+            id: player
+            autoPlay: true
+            volume: 0.8
+            source: current_song.mp3Url
+
+            onStatusChanged: {
+                if (status == Audio.EndOfMedia) {
+                    main_controller.playNext()
+                }
+            }
+        }
 
         Song { id: current_song }
 
@@ -105,7 +116,7 @@ Window {
                                     Component.onCompleted: _controller.getHotspot()
 
                                     onPlaylistClicked: {
-                                        _controller.getPlaylistDetail(playlistId)
+                                        playlist_detail_view.setPlaylist(playlistId)
                                     }
                                 }
                             }
@@ -132,7 +143,7 @@ Window {
                                     Component.onCompleted: _controller.getRankingLists()
 
                                     onPlaylistClicked: {
-                                        _controller.getPlaylistDetail(playlistId)
+                                        playlist_detail_view.setPlaylist(playlistId)
                                     }
                                 }
                             }
@@ -169,26 +180,30 @@ Window {
                         visible: false
                         anchors.fill: parent
 
-                        Connections {
-                            target: _controller
-                            onPlaylistDetailGot: {
-                                var result = JSON.parse(detail)
-
-                                playlist_detail_view.name = result.name
-                                playlist_detail_view.coverImgUrl = result.coverImgUrl
-                                playlist_detail_view.creator = result.creator.nickname
-                                playlist_detail_view.createTime = result.createTime
-                                playlist_detail_view.description = result.description
-                                playlist_detail_view.setData(result.tracks)
-
-                                playlist_detail_view.visible = true
-                            }
-                        }
-
                         onSongClicked: main_controller.playSong(song)
+                        onPlayAllClicked: {
+                            main_controller.playPlaylist(playlistId)
+                        }
 
                         function setPlaylist(playlistId) {
                             _controller.getPlaylistDetail(playlistId)
+
+                            _controller.playlistDetailGot.disconnect(main_controller.playlistDetailGot)
+                            _controller.playlistDetailGot.connect(playlistDetailGot)
+                        }
+
+                        function playlistDetailGot(detail) {
+                            var result = JSON.parse(detail)
+
+                            playlist_detail_view.id = result.id
+                            playlist_detail_view.name = result.name
+                            playlist_detail_view.coverImgUrl = result.coverImgUrl
+                            playlist_detail_view.creator = result.creator.nickname
+                            playlist_detail_view.createTime = result.createTime
+                            playlist_detail_view.description = result.description
+                            playlist_detail_view.setData(result.tracks)
+
+                            playlist_detail_view.visible = true
                         }
                     }
                 }
