@@ -8,6 +8,8 @@ Item {
     clip: true
 
     function setLyric(lyric) {
+        list_view.model.clear()
+
         var lyricDict = Utils.parseLyric(lyric)
         for (var timeStamp in lyricDict) {
             list_view.model.append({
