@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=NeteaseMusicForLinux
+Icon=NeteaseMusicForLinux
+Name=网易云音乐
+StartupNotify=true
+Terminal=false
+Type=Application
