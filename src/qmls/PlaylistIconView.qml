@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 
 GridView {
     id: grid_view
@@ -22,17 +23,67 @@ GridView {
             anchors.fill: parent
             anchors.margins: 20
 
-            Rectangle {
+            LinearGradient {
                 width: parent.width
                 height: 20
-                color: Qt.rgba(0, 0, 0, 0.5)
+                visible: play_count_text.text
+                start: Qt.point(0, 0)
+                end: Qt.point(width, 0)
                 anchors.top: parent.top
+
+                gradient: Gradient {
+                    GradientStop { position: 0.0; color: Qt.rgba(0, 0, 0, 0) }
+                    GradientStop { position: 1.0; color: Qt.rgba(0, 0, 0, 0.5) }
+                }
+
+                Row {
+                    height: parent.height
+                    spacing: 5
+                    anchors.right: parent.right
+                    anchors.rightMargin: 5
+
+                    Image {
+                        source: "qrc:/images/headphone.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    Text {
+                        id: play_count_text
+                        color: "white"
+                        text: playCount || ""
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
             }
-            Rectangle {
+            LinearGradient {
                 width: parent.width
                 height: 20
-                color: Qt.rgba(0, 0, 0, 0.5)
+                visible: creator_text.text
+                start: Qt.point(0, 0)
+                end: Qt.point(width, 0)
                 anchors.bottom: parent.bottom
+
+                gradient: Gradient {
+                    GradientStop { position: 0.0; color: Qt.rgba(0, 0, 0, 0.5) }
+                    GradientStop { position: 1.0; color: Qt.rgba(0, 0, 0, 0) }
+                }
+
+                Row {
+                    height: parent.height
+                    spacing: 5
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+
+                    Image {
+                        source: "qrc:/images/user_icon.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    Text {
+                        id: creator_text
+                        color: "white"
+                        text: (creator && creator["nickname"]) || ""
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
             }
 
             MouseArea {
@@ -50,6 +101,8 @@ GridView {
         var playlists = JSON.parse(data)
         playlists.forEach(function(playlist){
             if (!playlist["coverImgUrl"]) playlist["coverImgUrl"] = playlist["picUrl"]
+            if (!playlist["playCount"]) playlist["playCount"] = ""
+            if (!playlist["creator"]) playlist["creator"] = {}
             model.append(playlist)
         })
     }

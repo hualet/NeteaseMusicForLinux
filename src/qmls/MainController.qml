@@ -13,6 +13,7 @@ Item {
         current_song.artist = song.artist
         current_song.name = song.name
         current_song.album = song.album
+        current_song.lyric = ""
 
         _controller.getLyric(song.id)
     }

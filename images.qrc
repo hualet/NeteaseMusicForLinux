@@ -16,5 +16,7 @@
         <file>images/disc_mask.png</file>
         <file>images/disc_needle.png</file>
         <file>images/cancel_fullscreen.png</file>
+        <file>images/headphone.png</file>
+        <file>images/user_icon.png</file>
     </qresource>
 </RCC>
