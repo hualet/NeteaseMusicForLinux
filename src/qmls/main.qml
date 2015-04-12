@@ -17,7 +17,61 @@ Window {
 
     Item {
         id: window_content
+        focus: true
         anchors.fill: parent
+
+        state: "suggestions"
+
+        property bool stateChangedByUser: true
+
+        states: [
+            State {
+                name: "suggestions"
+                PropertyChanges { target: main_tab_view; currentIndex: 0 }
+                PropertyChanges { target: playlist_detail_view; visible: false }
+            },
+            State {
+                name: "ranklists"
+                PropertyChanges { target: main_tab_view; currentIndex: 1 }
+                PropertyChanges { target: playlist_detail_view; visible: false }
+            },
+            State {
+                name: "playlists"
+                PropertyChanges { target: main_tab_view; currentIndex: 2 }
+                PropertyChanges { target: playlist_detail_view; visible: false }
+            },
+            State {
+                name: "playlist_detail"
+                PropertyChanges { target: playlist_detail_view; visible: true }
+            }
+        ]
+
+        onStateChanged: {
+            if (stateChangedByUser) {
+                views_history_manager.append(state)
+            } else {
+                stateChangedByUser = true
+            }
+        }
+
+        Keys.onLeftPressed: goBack()
+        Keys.onRightPressed: goForward()
+
+        function goBack() {
+            var _state = views_history_manager.goBack()
+            if (_state) {
+                stateChangedByUser = false
+                state = _state
+            }
+        }
+
+        function goForward() {
+            var _state = views_history_manager.goForward()
+            if (_state) {
+                stateChangedByUser = false
+                state = _state
+            }
+        }
 
         Audio {
             id: player
@@ -35,6 +89,8 @@ Window {
         Song { id: current_song }
 
         MainController { id: main_controller }
+
+        ViewHistoryManager { id: views_history_manager }
 
         Connections {
             target: _controller
@@ -76,8 +132,13 @@ Window {
                     height: parent.height
 
                     HTTabView {
+                        id: main_tab_view
                         anchors.fill: parent
                         visible: !playlist_detail_view.visible
+
+                        property var _tabs: ["suggestions", "ranklists", "playlists"]
+
+                        onCurrentIndexChanged: window_content.state = _tabs[currentIndex]
 
                         Tab {
                             title: "推荐"
@@ -170,9 +231,9 @@ Window {
                                 }
                             }
                         }
-                        Tab {
-                            title: "最新音乐"
-                        }
+//                        Tab {
+//                            title: "最新音乐"
+//                        }
                     }
 
                     PlaylistDetialView {
@@ -204,6 +265,7 @@ Window {
                             playlist_detail_view.setData(result.tracks)
 
                             playlist_detail_view.visible = true
+                            window_content.state = "playlist_detail"
                         }
                     }
                 }
