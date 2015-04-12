@@ -286,6 +286,8 @@ Window {
                 onPause: player.pause()
                 onVolumeSet: player.volume = volume
                 onSeek: player.seek(player.duration * progress)
+                onPlayPrev: main_controller.playPrev()
+                onPlayNext: main_controller.playNext()
             }
         }
 

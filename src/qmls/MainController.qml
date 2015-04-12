@@ -1,6 +1,9 @@
 import QtQuick 2.0
 
 Item {
+    function playPrev() {
+    }
+
     function playNext() {
         var song = _controller.getNextPlaylistItem(current_song.id)
         playSong(song)

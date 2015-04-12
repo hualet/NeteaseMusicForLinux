@@ -18,6 +18,8 @@ Item {
     signal pause()
     signal seek(real progress)
     signal volumeSet(real volume)
+    signal playPrev()
+    signal playNext()
 
     Rectangle {
         anchors.fill: parent
@@ -41,6 +43,8 @@ Item {
             hoverPressedImage: "qrc:/images/prev_hover_pressed.png"
 
             anchors.verticalCenter: parent.verticalCenter
+
+            onClicked: root.playPrev()
         }
 
         HTImageButton {
@@ -60,6 +64,8 @@ Item {
             hoverPressedImage: "qrc:/images/next_hover_pressed.png"
 
             anchors.verticalCenter: parent.verticalCenter
+
+            onClicked: root.playNext()
         }
     }
 
