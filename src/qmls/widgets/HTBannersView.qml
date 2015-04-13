@@ -12,6 +12,7 @@ PathView {
     property int itemHeight: 365 / 2
 
     delegate: Image {
+        id: img
         z: parent.z + PathView.itemX == 0 ? 10 : 0
         width: path_view.itemWidth
         height: path_view.itemHeight
@@ -24,7 +25,7 @@ PathView {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: PathView.isCurrentItem ? Qt.openUrlExternally(url) : path_view.currentIndex = index
+            onClicked: path_view.currentIndex == index ? Qt.openUrlExternally(url) : path_view.currentIndex = index
         }
     }
     model: ListModel {}
@@ -48,6 +49,15 @@ PathView {
         banners.forEach(function(banner){
             model.append(banner)
         })
+    }
+
+    Timer {
+        running: true
+        repeat: true
+        interval: 2000
+        onTriggered: {
+            path_view.currentIndex = (path_view.currentIndex + 1) % 8
+        }
     }
 }
 
