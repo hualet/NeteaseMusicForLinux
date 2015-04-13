@@ -4,11 +4,11 @@
 ##功能：
 1. 热门精选
 
-[Imgur](http://i.imgur.com/KDG8KVX.png)
+![Imgur](http://i.imgur.com/KDG8KVX.png)
 
 2. 排行榜
 
-[Imgur](http://i.imgur.com/B9CuJak.png)
+![Imgur](http://i.imgur.com/B9CuJak.png)
 
 3. 网友歌单
 
