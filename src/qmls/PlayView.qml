@@ -8,6 +8,7 @@ Item {
     width: 100
     height: 80
     state: "mini"
+    visible: !!song
 
     property url picUrl
     property string artist
@@ -61,7 +62,7 @@ Item {
 
         Row {
             height: parent.height
-            spacing: 20
+            spacing: 16
 
             Item { width: 1; height: parent.height }
 
@@ -96,14 +97,18 @@ Item {
 
             Column {
                 spacing: 10
-                width: mini_mode.width - mini_cover.width
+                width: mini_mode.width - mini_cover.width - parent.spacing * 2
                 anchors.verticalCenter: parent.verticalCenter
 
                 Text {
+                    width: parent.width
                     text: root.song
+                    elide: Text.ElideRight
                 }
                 Text {
+                    width: parent.width
                     text: root.artist
+                    elide: Text.ElideRight
                 }
             }
         }
