@@ -1,15 +1,12 @@
 #NeteaseMusicForLinux
 网易云音乐的Linux版本
 
-##功能：
-1. 热门精选
-
 ![Imgur](http://i.imgur.com/KDG8KVX.png)
-
-2. 排行榜
-
 ![Imgur](http://i.imgur.com/B9CuJak.png)
 
+##功能：
+1. 热门精选
+2. 排行榜
 3. 网友歌单
 
 ##后期功能
@@ -20,7 +17,8 @@
 
 ##安装
 ###手动安装
-	mkdir build; cd build; qmake ..; make; make install
+	mkdir build; cd build
+	qmake ..; make; sudo make install
 	sudo gtk-update-icon-cache /usr/share/icons/hicolor/
 ###deb安装
 	即将支持
