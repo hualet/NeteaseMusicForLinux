@@ -112,6 +112,11 @@ Window {
             Header {
                 id: header
                 width: parent.width
+                canGoBack: views_history_manager.canGoBack
+                canGoForward: views_history_manager.canGoForward
+
+                onGoBack: window_content.goBack()
+                onGoForward: window_content.goForward()
             }
 
             Row {

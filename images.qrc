@@ -18,5 +18,11 @@
         <file>images/cancel_fullscreen.png</file>
         <file>images/headphone.png</file>
         <file>images/user_icon.png</file>
+        <file>images/left-arrow-hover.png</file>
+        <file>images/left-arrow-inactive.png</file>
+        <file>images/left-arrow-normal.png</file>
+        <file>images/right-arrow-hover.png</file>
+        <file>images/right-arrow-inactive.png</file>
+        <file>images/right-arrow-normal.png</file>
     </qresource>
 </RCC>

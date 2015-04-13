@@ -8,25 +8,26 @@ MouseArea {
 
     property url normalImage
     property url hoverPressedImage
+    property url inactiveImage
 
     states: [
         State {
             name: "normal"
             PropertyChanges {
                 target: img
-                source: normalImage
+                source: enabled ? normalImage : inactiveImage
             }
         },
         State {
             name: "hover_pressed"
             PropertyChanges {
                 target: img
-                source: hoverPressedImage
+                source: enabled ? hoverPressedImage : inactiveImage
             }
         }
     ]
 
-    Image { id: img }
+    Image { id: img; anchors.fill: parent }
 
     onEntered: state = "hover_pressed"
     onExited: state = "normal"
