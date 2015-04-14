@@ -9,6 +9,7 @@ import "../qmls/widgets"
 import "qrc:/src/qmls/utils.js" as Utils
 
 Window {
+    id: win
     visible: true
     width: 1000
     height: 640

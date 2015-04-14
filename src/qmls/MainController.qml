@@ -10,6 +10,8 @@ Item {
     }
 
     function playSong(song) {
+        win.title = song.name
+
         current_song.id = song.id
         current_song.mp3Url = song.mp3Url
         current_song.picUrl = song.picUrl
