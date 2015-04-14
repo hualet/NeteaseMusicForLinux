@@ -20,6 +20,7 @@ Item {
     signal volumeSet(real volume)
     signal playPrev()
     signal playNext()
+    signal togglePlaylist()
 
     Rectangle {
         anchors.fill: parent
@@ -95,5 +96,15 @@ Item {
 
         onMutedSet: root.mutedSet(muted)
         onVolumeSet: root.volumeSet(volume)
+    }
+
+    HTImageButton {
+        normalImage: "qrc:/images/playlist_normal.png"
+        hoverPressedImage: "qrc:/images/playlist_hover_pressed.png"
+        anchors.right: parent.right
+        anchors.rightMargin: 50
+        anchors.verticalCenter: parent.verticalCenter
+
+        onClicked: root.togglePlaylist()
     }
 }

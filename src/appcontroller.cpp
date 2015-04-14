@@ -46,12 +46,29 @@ void AppController::getBanners()
 
 
 void AppController::addPlaylistItem(QString id, QString name, QUrl mp3Url,
-                                    QUrl picUrl, QString artist, QString album)
+                                    QUrl picUrl, QString artist, QString album, int duration)
 {
-    m_playlistModel->addSong(id, name, mp3Url, picUrl, artist, album);
+    m_playlistModel->addSong(id, name, mp3Url, picUrl, artist, album, duration);
 }
 
 Song* AppController::getNextPlaylistItem(QString id)
 {
     return m_playlistModel->getNextSong(id);
 }
+
+
+PlaylistModel *AppController::playlistModel() const
+{
+    return m_playlistModel;
+}
+
+void AppController::setPlaylistModel(PlaylistModel *playlistModel)
+{
+    if (m_playlistModel != playlistModel) {
+        m_playlistModel = playlistModel;
+        emit playlistModelChanged();
+    }
+}
+
+
+

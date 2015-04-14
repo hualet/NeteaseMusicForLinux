@@ -23,5 +23,6 @@
         <file>src/qmls/widgets/HTTextButton.qml</file>
         <file>src/qmls/ViewHistoryManager.qml</file>
         <file>src/qmls/widgets/BackForwardButton.qml</file>
+        <file>src/qmls/PlaylistView.qml</file>
     </qresource>
 </RCC>

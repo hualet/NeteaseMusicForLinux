@@ -12,7 +12,14 @@ class AppController : public QObject
 public:
     explicit AppController(QObject *parent = 0);
 
+    Q_PROPERTY(PlaylistModel* playlistModel READ playlistModel WRITE setPlaylistModel NOTIFY playlistModelChanged)
+
+    PlaylistModel *playlistModel() const;
+    void setPlaylistModel(PlaylistModel *playlistModel);
+
 signals:
+    void playlistModelChanged();
+
     void topPlaylistsGot(QString playlists);
     void playlistDetailGot(QString detail);
     void rankingListsGot(QString lists);
@@ -29,7 +36,7 @@ public slots:
     void getBanners();
 
     void addPlaylistItem(QString id, QString name, QUrl mp3Url,
-                         QUrl picUrl, QString artist, QString album);
+                         QUrl picUrl, QString artist, QString album, int duration);
     Song* getNextPlaylistItem(QString id);
 
 private:

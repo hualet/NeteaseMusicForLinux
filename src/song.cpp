@@ -6,10 +6,11 @@ Song::Song(QObject *parent) :
 }
 
 Song::Song(QString& id, QString& name, QUrl& mp3Url, QUrl& picUrl,
-           QString& artist, QString& album, QObject *parent) :
+           QString& artist, QString& album, int duration, QObject *parent) :
     QObject(parent),
     m_id(id), m_name(name), m_mp3Url(mp3Url),
-    m_picUrl(picUrl), m_artist(artist), m_album(album)
+    m_picUrl(picUrl), m_artist(artist), m_album(album),
+    m_duration(duration)
 {
 
 }
@@ -99,4 +100,17 @@ void Song::setLyric(const QString &lyric)
         emit lyricChanged();
     }
 }
+int Song::duration() const
+{
+    return m_duration;
+}
+
+void Song::setDuration(const int duration)
+{
+    if (m_duration != duration) {
+        m_duration = duration;
+        emit durationChanged();
+    }
+}
+
 

@@ -10,7 +10,7 @@ class Song : public QObject
 public:
     explicit Song(QObject *parent = 0);
     Song(QString& id, QString& name, QUrl& mp3Url, QUrl& picUrl,
-         QString& artist, QString& album, QObject *parent=0);
+         QString& artist, QString& album, int duration, QObject *parent=0);
 
     Q_PROPERTY(QUrl mp3Url READ mp3Url WRITE setMp3Url NOTIFY mp3UrlChanged)
     Q_PROPERTY(QUrl picUrl READ picUrl WRITE setPicUrl NOTIFY picUrlChanged)
@@ -19,6 +19,7 @@ public:
     Q_PROPERTY(QString album READ album WRITE setAlbum NOTIFY albumChanged)
     Q_PROPERTY(QString id READ id WRITE setId NOTIFY idChanged)
     Q_PROPERTY(QString lyric READ lyric WRITE setLyric NOTIFY lyricChanged)
+    Q_PROPERTY(int duration READ duration WRITE setDuration NOTIFY durationChanged)
 
     QUrl mp3Url() const;
     void setMp3Url(const QUrl &mp3Url);
@@ -41,6 +42,9 @@ public:
     QString lyric() const;
     void setLyric(const QString &lyric);
 
+    int duration() const;
+    void setDuration(const int duration);
+
 signals:
     void idChanged();
     void mp3UrlChanged();
@@ -49,6 +53,7 @@ signals:
     void nameChanged();
     void albumChanged();
     void lyricChanged();
+    void durationChanged();
 
 private:
     QString m_id;
@@ -58,6 +63,7 @@ private:
     QString m_artist;
     QString m_album;
     QString m_lyric;
+    int m_duration;
 };
 
 #endif // SONG_H

@@ -247,7 +247,7 @@ Window {
                         visible: false
                         anchors.fill: parent
 
-                        onSongClicked: main_controller.playSong(song)
+                        onSongClicked: main_controller.playSong(song, true)
                         onPlayAllClicked: {
                             main_controller.playPlaylist(playlistId)
                         }
@@ -294,6 +294,7 @@ Window {
                 onSeek: player.seek(player.duration * progress)
                 onPlayPrev: main_controller.playPrev()
                 onPlayNext: main_controller.playNext()
+                onTogglePlaylist: main_controller.togglePlaylist()
             }
         }
 
@@ -316,6 +317,17 @@ Window {
 
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
+            }
+
+            PlaylistView {
+                id: playlist_view
+                visible: false
+                model: _controller.playlistModel
+                currentSong: current_song.id
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+
+                onSongClicked: main_controller.playSong(song, false)
             }
         }
     }

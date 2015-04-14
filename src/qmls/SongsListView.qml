@@ -87,6 +87,7 @@ ListView {
                 song.artist = artists.get(0).name
                 song.mp3Url = mp3Url
                 song.picUrl = album.picUrl
+                song.duration = duration
                 list_view.songClicked(song)
             }
         }

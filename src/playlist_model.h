@@ -16,13 +16,14 @@ public:
         Mp3UrlRole,
         PicUrlRole,
         ArtistRole,
-        AlbumRole
+        AlbumRole,
+        DurationRole,
     };
 
     explicit PlaylistModel(QObject *parent = 0);
 
     void addSong(QString id, QString name, QUrl mp3Url,
-                 QUrl picUrl, QString artist, QString album);
+                 QUrl picUrl, QString artist, QString album, int duration);
     Song* getNextSong(QString id);
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
@@ -30,6 +31,9 @@ public:
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
     QHash<int,QByteArray> roleNames() const;
+
+public slots:
+    Song* getSongAtIndex(int index);
 
 private:
     QList<Song*> m_songs;

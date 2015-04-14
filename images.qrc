@@ -24,5 +24,7 @@
         <file>images/right-arrow-hover.png</file>
         <file>images/right-arrow-inactive.png</file>
         <file>images/right-arrow-normal.png</file>
+        <file>images/playlist_hover_pressed.png</file>
+        <file>images/playlist_normal.png</file>
     </qresource>
 </RCC>

@@ -8,9 +8,9 @@ PlaylistModel::PlaylistModel(QObject *parent) :
 }
 
 void PlaylistModel::addSong(QString id, QString name, QUrl mp3Url,
-                       QUrl picUrl, QString artist, QString album)
+                       QUrl picUrl, QString artist, QString album, int duration)
 {
-    Song *song = new Song(id, name, mp3Url, picUrl, artist, album, this);
+    Song *song = new Song(id, name, mp3Url, picUrl, artist, album, duration, this);
 
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_songs << song;
@@ -32,6 +32,11 @@ Song* PlaylistModel::getNextSong(QString id)
     } else {
         return NULL;
     }
+}
+
+Song* PlaylistModel::getSongAtIndex(int index)
+{
+    return m_songs.at(index);
 }
 
 
@@ -58,6 +63,8 @@ QVariant PlaylistModel::data(const QModelIndex & index, int role) const {
         return song->artist();
     case AlbumRole:
         return song->album();
+    case DurationRole:
+        return song->duration();
     }
 
     return QVariant();
@@ -72,5 +79,6 @@ QHash<int, QByteArray> PlaylistModel::roleNames() const
     roles[PicUrlRole] = "picUrl";
     roles[ArtistRole] = "artist";
     roles[AlbumRole] = "album";
+    roles[DurationRole] = "duration";
     return roles;
 }
