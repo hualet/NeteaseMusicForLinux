@@ -38,9 +38,13 @@ Item {
         anchors.left: title_text.right
         anchors.leftMargin: 80
         anchors.verticalCenter: parent.verticalCenter
+        spacing: -1
 
         HTImageButton {
             id: go_back_button
+            enabled: false
+            width: 28
+            height: 28
             normalImage: "qrc:/images/left_arrow_normal.png"
             hoverPressedImage: "qrc:/images/left_arrow_hover.png"
             inactiveImage: "qrc:/images/left_arrow_inactive.png"
@@ -49,6 +53,9 @@ Item {
         }
         HTImageButton {
             id: go_forward_button
+            enabled: false
+            width: 28
+            height: 28
             normalImage: "qrc:/images/right_arrow_normal.png"
             hoverPressedImage: "qrc:/images/right_arrow_hover.png"
             inactiveImage: "qrc:/images/right_arrow_inactive.png"

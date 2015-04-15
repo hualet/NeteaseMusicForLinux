@@ -10,6 +10,8 @@ MouseArea {
     property url hoverPressedImage
     property url inactiveImage
 
+    onEnabledChanged: state = "normal"
+
     states: [
         State {
             name: "normal"
@@ -22,7 +24,7 @@ MouseArea {
             name: "hover_pressed"
             PropertyChanges {
                 target: img
-                source: enabled ? hoverPressedImage : inactiveImage
+                source: hoverPressedImage
             }
         }
     ]
@@ -32,5 +34,5 @@ MouseArea {
     onEntered: state = "hover_pressed"
     onExited: state = "normal"
     onPressed: state = "hover_pressed"
-    onReleased: state = containsMouse ? "hover_pressed" : "normal"
+    onReleased: state = (containsMouse ? "hover_pressed" : "normal")
 }
