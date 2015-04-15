@@ -77,14 +77,17 @@ Window {
         Audio {
             id: player
             autoPlay: true
-            volume: 0.8
             source: current_song.mp3Url
+
+            onVolumeChanged: _settings.volume = volume
 
             onStatusChanged: {
                 if (status == Audio.EndOfMedia) {
                     main_controller.playNext()
                 }
             }
+
+            Component.onCompleted: volume = _settings.volume || 0.5
         }
 
         Song { id: current_song }

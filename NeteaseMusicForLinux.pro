@@ -6,7 +6,8 @@ SOURCES += src/main.cpp \
     src/netease_api/neteaseapi.cpp \
     src/appcontroller.cpp \
     src/song.cpp \
-    src/playlist_model.cpp
+    src/playlist_model.cpp \
+    src/htsettings.cpp
 
 RESOURCES += qml.qrc \
     images.qrc
@@ -21,7 +22,8 @@ HEADERS += \
     src/netease_api/neteaseapi.h \
     src/appcontroller.h \
     src/song.h \
-    src/playlist_model.h
+    src/playlist_model.h \
+    src/htsettings.h
 
 
 unix {
