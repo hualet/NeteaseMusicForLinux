@@ -38,6 +38,7 @@ public slots:
     void addPlaylistItem(QString id, QString name, QUrl mp3Url,
                          QUrl picUrl, QString artist, QString album, int duration);
     Song* getNextPlaylistItem(QString id);
+    Song* getPlaylistItemById(QString id);
 
 private:
     NeteaseAPI* m_api;

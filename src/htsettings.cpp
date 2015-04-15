@@ -13,5 +13,14 @@ double HTSettings::volume()
 void HTSettings::setVolume(double volume)
 {
     setValue("General/volume", QVariant(volume));
-    emit volumeChanged();
+}
+
+QString HTSettings::lastSong() const
+{
+    return value("General/last_song").toString();
+}
+
+void HTSettings::setLastSong(QString& lastSong)
+{
+    setValue("General/last_song", QVariant(lastSong));
 }

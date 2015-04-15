@@ -25,6 +25,7 @@ public:
     void addSong(QString id, QString name, QUrl mp3Url,
                  QUrl picUrl, QString artist, QString album, int duration);
     Song* getNextSong(QString id);
+    Song* getSongById(QString id);
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
 

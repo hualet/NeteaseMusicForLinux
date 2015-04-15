@@ -17,6 +17,16 @@ void PlaylistModel::addSong(QString id, QString name, QUrl mp3Url,
     endInsertRows();
 }
 
+Song* PlaylistModel::getSongById(QString id)
+{
+    for (int i = 0; i < m_songs.size(); ++i) {
+        if (m_songs.at(i)->id() == id) {
+            return m_songs.at(i);
+        }
+    }
+    return NULL;
+}
+
 Song* PlaylistModel::getNextSong(QString id)
 {
     int index = -1;

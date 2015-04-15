@@ -56,6 +56,11 @@ Song* AppController::getNextPlaylistItem(QString id)
     return m_playlistModel->getNextSong(id);
 }
 
+Song* AppController::getPlaylistItemById(QString id)
+{
+    return m_playlistModel->getSongById(id);
+}
+
 
 PlaylistModel *AppController::playlistModel() const
 {

@@ -90,7 +90,30 @@ Window {
             Component.onCompleted: volume = _settings.volume || 0.5
         }
 
-        Song { id: current_song }
+        Song {
+            id: current_song
+
+            Component.onCompleted: {
+                var id = _settings.lastSong
+                if (id) {
+                    print(id)
+                    var song = _controller.getPlaylistItemById(id)
+                    print(song)
+                    if (song) {
+                        current_song.id = song.id
+                        current_song.mp3Url = song.mp3Url
+                        current_song.picUrl = song.picUrl
+                        current_song.artist = song.artist
+                        current_song.name = song.name
+                        current_song.album = song.album
+                        current_song.duration = song.duration
+                        current_song.lyric = ""
+
+                        _controller.getLyric(song.id)
+                    }
+                }
+            }
+        }
 
         MainController { id: main_controller }
 

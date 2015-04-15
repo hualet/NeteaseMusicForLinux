@@ -2,7 +2,6 @@
 #define HTSETTINGS_H
 
 #include <QSettings>
-#include <QDebug>
 
 class HTSettings : public QSettings
 {
@@ -10,14 +9,14 @@ class HTSettings : public QSettings
 public:
     explicit HTSettings(QObject *parent = 0);
 
-    Q_PROPERTY(double volume READ volume WRITE setVolume NOTIFY volumeChanged)
+    Q_PROPERTY(double volume READ volume WRITE setVolume)
+    Q_PROPERTY(QString lastSong READ lastSong WRITE setLastSong)
 
-signals:
-    void volumeChanged();
-
-public slots:
     double volume();
     void setVolume(double volume);
+
+    QString lastSong() const;
+    void setLastSong(QString& lastSong);
 };
 
 #endif // HTSETTINGS_H
