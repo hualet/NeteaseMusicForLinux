@@ -31,4 +31,6 @@ MouseArea {
 
     onEntered: state = "hover_pressed"
     onExited: state = "normal"
+    onPressed: state = "hover_pressed"
+    onReleased: state = containsMouse ? "hover_pressed" : "normal"
 }

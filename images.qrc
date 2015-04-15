@@ -18,12 +18,12 @@
         <file>images/cancel_fullscreen.png</file>
         <file>images/headphone.png</file>
         <file>images/user_icon.png</file>
-        <file>images/left-arrow-hover.png</file>
-        <file>images/left-arrow-inactive.png</file>
-        <file>images/left-arrow-normal.png</file>
-        <file>images/right-arrow-hover.png</file>
-        <file>images/right-arrow-inactive.png</file>
-        <file>images/right-arrow-normal.png</file>
+        <file>images/left_arrow_hover.png</file>
+        <file>images/left_arrow_inactive.png</file>
+        <file>images/left_arrow_normal.png</file>
+        <file>images/right_arrow_hover.png</file>
+        <file>images/right_arrow_inactive.png</file>
+        <file>images/right_arrow_normal.png</file>
         <file>images/playlist_hover_pressed.png</file>
         <file>images/playlist_normal.png</file>
     </qresource>

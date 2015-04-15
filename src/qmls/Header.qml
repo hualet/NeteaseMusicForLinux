@@ -41,21 +41,17 @@ Item {
 
         HTImageButton {
             id: go_back_button
-            width: 32
-            height: 32
-            normalImage: "qrc:/images/left-arrow-normal.png"
-            hoverPressedImage: "qrc:/images/left-arrow-hover.png"
-            inactiveImage: "qrc:/images/left-arrow-inactive.png"
+            normalImage: "qrc:/images/left_arrow_normal.png"
+            hoverPressedImage: "qrc:/images/left_arrow_hover.png"
+            inactiveImage: "qrc:/images/left_arrow_inactive.png"
 
             onClicked: root.goBack()
         }
         HTImageButton {
             id: go_forward_button
-            width: 32
-            height: 32
-            normalImage: "qrc:/images/right-arrow-normal.png"
-            hoverPressedImage: "qrc:/images/right-arrow-hover.png"
-            inactiveImage: "qrc:/images/right-arrow-inactive.png"
+            normalImage: "qrc:/images/right_arrow_normal.png"
+            hoverPressedImage: "qrc:/images/right_arrow_hover.png"
+            inactiveImage: "qrc:/images/right_arrow_inactive.png"
 
             onClicked: root.goForward()
         }
