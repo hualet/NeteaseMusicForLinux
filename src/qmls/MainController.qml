@@ -27,6 +27,7 @@ Item {
 
         _controller.getLyric(song.id)
 
+        player.play()
         _settings.lastSong = song.id
         if (addToPlaylist) {
             _controller.addPlaylistItem(song.id, song.name, song.mp3Url, song.picUrl,

@@ -5,7 +5,7 @@ Song::Song(QObject *parent) :
 {
 }
 
-Song::Song(QString& id, QString& name, QUrl& mp3Url, QUrl& picUrl,
+Song::Song(QString& id, QString& name, QString& mp3Url, QString& picUrl,
            QString& artist, QString& album, int duration, QObject *parent) :
     QObject(parent),
     m_id(id), m_name(name), m_mp3Url(mp3Url),
@@ -15,24 +15,24 @@ Song::Song(QString& id, QString& name, QUrl& mp3Url, QUrl& picUrl,
 
 }
 
-QUrl Song::mp3Url() const
+QString Song::mp3Url() const
 {
     return m_mp3Url;
 }
 
-void Song::setMp3Url(const QUrl &mp3Url)
+void Song::setMp3Url(const QString &mp3Url)
 {
     if (m_mp3Url != mp3Url) {
         m_mp3Url = mp3Url;
         emit mp3UrlChanged();
     }
 }
-QUrl Song::picUrl() const
+QString Song::picUrl() const
 {
     return m_picUrl;
 }
 
-void Song::setPicUrl(const QUrl &picUrl)
+void Song::setPicUrl(const QString &picUrl)
 {
     if (m_picUrl != picUrl) {
         m_picUrl = picUrl;

@@ -2,18 +2,21 @@
 
 #include <QDebug>
 
-PlaylistModel::PlaylistModel(QObject *parent) :
-    QAbstractListModel(parent)
+PlaylistModel::PlaylistModel(Database* database, QObject *parent) :
+    QAbstractListModel(parent),
+    m_database(database)
 {
+    m_songs.append(m_database->getPlaylistItems());
 }
 
-void PlaylistModel::addSong(QString id, QString name, QUrl mp3Url,
-                       QUrl picUrl, QString artist, QString album, int duration)
+void PlaylistModel::addSong(QString id, QString name, QString mp3Url,
+                       QString picUrl, QString artist, QString album, int duration)
 {
     Song *song = new Song(id, name, mp3Url, picUrl, artist, album, duration, this);
 
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_songs << song;
+    m_database->addPlaylistItem(song);
     endInsertRows();
 }
 

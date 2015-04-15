@@ -5,6 +5,7 @@
 #include <QList>
 
 #include "song.h"
+#include "database.h"
 
 class PlaylistModel : public QAbstractListModel
 {
@@ -20,10 +21,10 @@ public:
         DurationRole,
     };
 
-    explicit PlaylistModel(QObject *parent = 0);
+    explicit PlaylistModel(Database *database, QObject *parent = 0);
 
-    void addSong(QString id, QString name, QUrl mp3Url,
-                 QUrl picUrl, QString artist, QString album, int duration);
+    void addSong(QString id, QString name, QString mp3Url,
+                 QString picUrl, QString artist, QString album, int duration);
     Song* getNextSong(QString id);
     Song* getSongById(QString id);
 
@@ -38,6 +39,7 @@ public slots:
 
 private:
     QList<Song*> m_songs;
+    Database* m_database;
 };
 
 #endif // PLAYLIST_MODEL_H

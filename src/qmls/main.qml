@@ -76,7 +76,7 @@ Window {
 
         Audio {
             id: player
-            autoPlay: true
+            autoPlay: false
             source: current_song.mp3Url
 
             onVolumeChanged: _settings.volume = volume

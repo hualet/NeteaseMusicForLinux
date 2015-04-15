@@ -7,6 +7,7 @@
 #include "song.h"
 #include "playlist_model.h"
 #include "htsettings.h"
+#include "database.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,6 +18,7 @@ int main(int argc, char *argv[])
 
     AppController controller;
     HTSettings settings;
+    Database database;
 
     qRegisterMetaType<PlaylistModel*>("PlaylistModel*");
     qmlRegisterType<Song>("Org.Hualet.Widgets", 1, 0, "Song");

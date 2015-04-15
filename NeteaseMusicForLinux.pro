@@ -1,13 +1,14 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += qml quick sql
 
 SOURCES += src/main.cpp \
     src/netease_api/neteaseapi.cpp \
     src/appcontroller.cpp \
     src/song.cpp \
     src/playlist_model.cpp \
-    src/htsettings.cpp
+    src/htsettings.cpp \
+    src/database.cpp
 
 RESOURCES += qml.qrc \
     images.qrc
@@ -23,7 +24,8 @@ HEADERS += \
     src/appcontroller.h \
     src/song.h \
     src/playlist_model.h \
-    src/htsettings.h
+    src/htsettings.h \
+    src/database.h
 
 
 unix {

@@ -4,7 +4,8 @@ AppController::AppController(QObject *parent) :
     QObject(parent)
 {
     m_api = new NeteaseAPI(this);
-    m_playlistModel = new PlaylistModel(this);
+    m_database = new Database(this);
+    m_playlistModel = new PlaylistModel(m_database, this);
 
     connect(m_api, &NeteaseAPI::topPlaylistGot, this, &AppController::topPlaylistsGot);
     connect(m_api, &NeteaseAPI::playlistDetailGot, this, &AppController::playlistDetailGot);
@@ -45,8 +46,8 @@ void AppController::getBanners()
 }
 
 
-void AppController::addPlaylistItem(QString id, QString name, QUrl mp3Url,
-                                    QUrl picUrl, QString artist, QString album, int duration)
+void AppController::addPlaylistItem(QString id, QString name, QString mp3Url,
+                                    QString picUrl, QString artist, QString album, int duration)
 {
     m_playlistModel->addSong(id, name, mp3Url, picUrl, artist, album, duration);
 }
