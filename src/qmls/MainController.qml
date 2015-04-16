@@ -1,12 +1,55 @@
 import QtQuick 2.0
+import QtMultimedia 5.0
+
+import QtQuick.Controls 1.1
 
 Item {
+    Action { shortcut: "Space"; onTriggered: togglePlay() }
+    Action { shortcut: "Ctrl+PgDown"; onTriggered: playNext() }
+    Action { shortcut: "Ctrl+PgUp"; onTriggered: playPrev() }
+    Action { shortcut: "Right"; onTriggered: forward() }
+    Action { shortcut: "Left"; onTriggered: rewind() }
+    Action { shortcut: "Up"; onTriggered: volumeUp() }
+    Action { shortcut: "Down"; onTriggered: volumeDown() }
+
     function playPrev() {
     }
 
     function playNext() {
         var song = _controller.getNextPlaylistItem(current_song.id)
         playSong(song, false)
+    }
+
+    function togglePlay() {
+        if (player.source) {
+            if (player.playbackState == Audio.PlayingState) {
+                player.pause()
+            } else {
+                player.play()
+            }
+        }
+    }
+
+    function forward() {
+        if (player.source) {
+            var position = Math.min(player.position + 3000, player.duration)
+            player.seek(position)
+        }
+    }
+
+    function rewind() {
+        if (player.source) {
+            var position = Math.max(player.position - 3000, 0)
+            player.seek(position)
+        }
+    }
+
+    function volumeUp() {
+        player.volume += 0.1
+    }
+
+    function volumeDown() {
+        player.volume -= 0.1
     }
 
     function togglePlaylist() {
