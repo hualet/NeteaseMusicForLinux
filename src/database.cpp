@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QSqlQuery>
 #include <QVariant>
+#include <QDebug>
 
 Database::Database(QObject *parent) :
     QObject(parent)
@@ -13,17 +14,18 @@ Database::Database(QObject *parent) :
     QString appConfigDir = QDir(configDir).filePath("NeteaseMusicForLinux");
     m_fileName = QDir(appConfigDir).filePath("playlist.db");
 
-    QFile file(m_fileName);
-    if (!file.exists()) {
-        file.open(QFile::WriteOnly);
-        file.close();
-
-        initDatabase();
-    }
+    initDatabase();
+    initDelayCommitTimer();
 }
 
 void Database::initDatabase()
 {
+    QFile file(m_fileName);
+    if (!file.exists()) {
+        file.open(QFile::WriteOnly);
+        file.close();
+    }
+
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(m_fileName);
     db.open();
@@ -37,14 +39,21 @@ void Database::initDatabase()
                "MP3URL CHAR,"
                "PICURL CHAR,"
                "DURATION LONG)");
-    db.close();
+}
+
+void Database::initDelayCommitTimer()
+{
+    m_delayCommitTimer = new QTimer(this);
+    m_delayCommitTimer->setInterval(500);
+    m_delayCommitTimer->setSingleShot(true);
+
+    connect(m_delayCommitTimer, &QTimer::timeout, this, &Database::delayCommitTimerTimeout);
 }
 
 void Database::addPlaylistItem(Song *song)
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(m_fileName);
-    db.open();
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
 
     QSqlQuery query;
     query.prepare("INSERT INTO PLAYLIST (ID, NAME, ARTIST, ALBUM, MP3URL, PICURL, DURATION)"
@@ -58,15 +67,12 @@ void Database::addPlaylistItem(Song *song)
     query.addBindValue(song->duration());
     query.exec();
 
-    db.close();
+    m_delayCommitTimer->start();
 }
 
 QList<Song*> Database::getPlaylistItems()
 {
     QList<Song*> list;
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(m_fileName);
-    db.open();
 
     QSqlQuery query("SELECT * FROM PLAYLIST");
     while (query.next()) {
@@ -83,7 +89,11 @@ QList<Song*> Database::getPlaylistItems()
         list << song;
     }
 
-    db.close();
-
     return list;
+}
+
+void Database::delayCommitTimerTimeout()
+{
+    qDebug() << "delaycommitTimerTimeout";
+    QSqlDatabase::database().commit();
 }

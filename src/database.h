@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QSqlDatabase>
 #include <QList>
+#include <QTimer>
 
 #include "song.h"
 
@@ -16,10 +17,14 @@ public:
     void addPlaylistItem(Song* song);
     QList<Song*> getPlaylistItems();
 
+    void delayCommitTimerTimeout();
+
 private:
     QString m_fileName;
+    QTimer *m_delayCommitTimer;
 
     void initDatabase();
+    void initDelayCommitTimer();
 };
 
 #endif // DATABASE_H
