@@ -29,7 +29,7 @@ NeteaseAPI::~NeteaseAPI()
 {
 }
 
-void NeteaseAPI::login(QString &username, QString &password)
+void NeteaseAPI::login(QString username, QString password)
 {
     QUrl url("http://music.163.com/api/login/");
     QUrlQuery params;
@@ -125,7 +125,9 @@ void NeteaseAPI::handleLoginFinished()
          QJsonObject object = document.object();
          // TODO: save the info or something here
          qDebug() << "handleLoginFinished data" << array.data();
+         emit loginSucceed(document.toJson());
      } else {
+         emit loginFailed();
          qDebug() << "handleLoginFinished error" << reply->errorString();
      }
 }

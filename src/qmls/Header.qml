@@ -12,6 +12,7 @@ Item {
 
     signal goBack()
     signal goForward()
+    signal login()
 
     Rectangle {
         anchors.fill: parent
@@ -62,6 +63,15 @@ Item {
 
             onClicked: root.goForward()
         }
+    }
+
+    HTTextButton {
+        text: "登录"
+        anchors.right: parent.right
+        anchors.rightMargin: 20
+        anchors.verticalCenter: parent.verticalCenter
+
+        onClicked: root.login()
     }
 }
 

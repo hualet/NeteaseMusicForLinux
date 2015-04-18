@@ -1,4 +1,5 @@
 #include "appcontroller.h"
+#include <QDebug>
 
 AppController::AppController(QObject *parent) :
     QObject(parent)
@@ -7,12 +8,20 @@ AppController::AppController(QObject *parent) :
     m_database = new Database(this);
     m_playlistModel = new PlaylistModel(m_database, this);
 
+    connect(m_api, &NeteaseAPI::loginSucceed, this, &AppController::loginSucceed);
+    connect(m_api, &NeteaseAPI::loginFailed, this, &AppController::loginFailed);
     connect(m_api, &NeteaseAPI::topPlaylistGot, this, &AppController::topPlaylistsGot);
     connect(m_api, &NeteaseAPI::playlistDetailGot, this, &AppController::playlistDetailGot);
     connect(m_api, &NeteaseAPI::rankingListsGot, this, &AppController::rankingListsGot);
     connect(m_api, &NeteaseAPI::lyricGot, this, &AppController::lyricGot);
     connect(m_api, &NeteaseAPI::hotspotGot, this, &AppController::hotspotGot);
     connect(m_api, &NeteaseAPI::bannersGot, this, &AppController::bannersGot);
+}
+
+void AppController::login(QString account, QString password)
+{
+    qDebug() << account << password;
+    m_api->login(account, password);
 }
 
 void AppController::getTopPlaylists()

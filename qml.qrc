@@ -24,5 +24,7 @@
         <file>src/qmls/ViewHistoryManager.qml</file>
         <file>src/qmls/widgets/BackForwardButton.qml</file>
         <file>src/qmls/PlaylistView.qml</file>
+        <file>src/qmls/LoginDialog.qml</file>
+        <file>src/qmls/widgets/HTTextInput.qml</file>
     </qresource>
 </RCC>

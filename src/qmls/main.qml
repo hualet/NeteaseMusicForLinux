@@ -121,6 +121,13 @@ Window {
 
         Connections {
             target: _controller
+
+            onLoginSucceed: {
+                login_dialog.close()
+            }
+
+            onLoginFailed: {}
+
             onLyricGot: {
                 current_song.lyric = lyric
             }
@@ -144,6 +151,7 @@ Window {
 
                 onGoBack: window_content.goBack()
                 onGoForward: window_content.goForward()
+                onLogin: login_dialog.open()
             }
 
             Row {
@@ -329,6 +337,11 @@ Window {
             y: header.height
             width: parent.width
             height: parent.height - header.height - footer.height
+
+            LoginDialog {
+                id: login_dialog
+                onLogin: _controller.login(account, password)
+            }
 
             PlayView {
                 width: state == "mini" ? side_bar.width : parent.width

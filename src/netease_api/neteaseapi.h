@@ -16,7 +16,7 @@ public:
     NeteaseAPI(QObject *parent=0);
     ~NeteaseAPI();
 
-    void login(QString &, QString &);
+    void login(QString, QString);
     void topPlaylist(QString category="全部", QString order="hot", quint8 offset=0, quint8 limit=50);
     void playlistDetail(QString);
     void rankingLists();
@@ -25,6 +25,8 @@ public:
     void getBanners();
 
 signals:
+    void loginSucceed(QString info);
+    void loginFailed();
     void topPlaylistGot(QString playlists);
     void playlistDetailGot(QString detail);
     void rankingListsGot(QString lists);

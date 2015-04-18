@@ -21,6 +21,8 @@ public:
 signals:
     void playlistModelChanged();
 
+    void loginSucceed(QString info);
+    void loginFailed();
     void topPlaylistsGot(QString playlists);
     void playlistDetailGot(QString detail);
     void rankingListsGot(QString lists);
@@ -29,6 +31,7 @@ signals:
     void bannersGot(QString banners);
 
 public slots:
+    void login(QString, QString);
     void getTopPlaylists();
     void getPlaylistDetail(QString);
     void getRankingLists();
