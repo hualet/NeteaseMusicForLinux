@@ -41,6 +41,19 @@ void NeteaseAPI::login(QString username, QString password)
     connect(reply, &QNetworkReply::finished, this, &NeteaseAPI::handleLoginFinished);
 }
 
+void NeteaseAPI::userPlaylist(QString uid)
+{
+    QUrl url = QString("http://music.163.com/api/user/playlist");
+    QUrlQuery query;
+    query.addQueryItem("offset", QString::number(0));
+    query.addQueryItem("limit", QString::number(100));
+    query.addQueryItem("uid", uid);
+    url.setQuery(query.toString(QUrl::FullyEncoded));
+
+    QNetworkReply* reply = get(url);
+    connect(reply, &QNetworkReply::finished, this, &NeteaseAPI::handleUserPlaylistFinished);
+}
+
 void NeteaseAPI::topPlaylist(QString category, QString order, quint8 offset, quint8 limit)
 {
     QUrl url = QString("http://music.163.com/api/playlist/list");
@@ -124,12 +137,32 @@ void NeteaseAPI::handleLoginFinished()
          QJsonDocument document = QJsonDocument::fromJson(array);
          QJsonObject object = document.object();
          // TODO: save the info or something here
-         qDebug() << "handleLoginFinished data" << array.data();
-         emit loginSucceed(document.toJson());
+         emit loginSucceed(QString(document.toJson()));
      } else {
          emit loginFailed();
          qDebug() << "handleLoginFinished error" << reply->errorString();
      }
+}
+
+void NeteaseAPI::handleUserPlaylistFinished()
+{
+    QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
+
+    if (!reply->error()) {
+        QByteArray array = reply->readAll();
+        QJsonDocument document = QJsonDocument::fromJson(array);
+        QJsonObject object = document.object();
+        QJsonArray playlist = object["playlist"].toArray();
+
+        if (!playlist.isEmpty()) {
+            QJsonDocument document(playlist);
+            emit userPlaylistGot(QString(document.toJson()));
+        } else {
+            qDebug() << "No user playlists found!";
+        }
+    } else {
+        qWarning() << "handleUserPlaylistFinished" << reply->errorString();
+    }
 }
 
 void NeteaseAPI::handleTopPlaylistFinished()
@@ -147,7 +180,7 @@ void NeteaseAPI::handleTopPlaylistFinished()
             QJsonDocument document(playlists);
             emit topPlaylistGot(QString(document.toJson()));
         } else {
-            qDebug() << "No playlists found!";
+            qDebug() << "No top playlists found!";
         }
     } else {
         qWarning() << "handleTopPlaylistFinished" << reply->errorString();

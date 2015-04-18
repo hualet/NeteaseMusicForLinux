@@ -10,6 +10,7 @@ AppController::AppController(QObject *parent) :
 
     connect(m_api, &NeteaseAPI::loginSucceed, this, &AppController::loginSucceed);
     connect(m_api, &NeteaseAPI::loginFailed, this, &AppController::loginFailed);
+    connect(m_api, &NeteaseAPI::userPlaylistGot, this, &AppController::userPlaylistsGot);
     connect(m_api, &NeteaseAPI::topPlaylistGot, this, &AppController::topPlaylistsGot);
     connect(m_api, &NeteaseAPI::playlistDetailGot, this, &AppController::playlistDetailGot);
     connect(m_api, &NeteaseAPI::rankingListsGot, this, &AppController::rankingListsGot);
@@ -20,8 +21,11 @@ AppController::AppController(QObject *parent) :
 
 void AppController::login(QString account, QString password)
 {
-    qDebug() << account << password;
     m_api->login(account, password);
+}
+
+void AppController::getUserPlaylists(QString uid) {
+    m_api->userPlaylist(uid);
 }
 
 void AppController::getTopPlaylists()
@@ -71,6 +75,18 @@ Song* AppController::getPlaylistItemById(QString id)
     return m_playlistModel->getSongById(id);
 }
 
+QString AppController::userId() const
+{
+    return m_userId;
+}
+
+void AppController::setUserId(QString userId)
+{
+    if (m_userId != userId) {
+        m_userId = userId;
+        emit userIdChanged();
+    }
+}
 
 PlaylistModel *AppController::playlistModel() const
 {

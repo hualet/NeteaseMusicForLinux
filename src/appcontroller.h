@@ -13,16 +13,22 @@ class AppController : public QObject
 public:
     explicit AppController(QObject *parent = 0);
 
+    Q_PROPERTY(QString userId READ userId WRITE setUserId NOTIFY userIdChanged)
     Q_PROPERTY(PlaylistModel* playlistModel READ playlistModel WRITE setPlaylistModel NOTIFY playlistModelChanged)
 
     PlaylistModel *playlistModel() const;
     void setPlaylistModel(PlaylistModel *playlistModel);
 
+    QString userId() const;
+    void setUserId(QString userId);
+
 signals:
+    void userIdChanged();
     void playlistModelChanged();
 
     void loginSucceed(QString info);
     void loginFailed();
+    void userPlaylistsGot(QString userPlaylists);
     void topPlaylistsGot(QString playlists);
     void playlistDetailGot(QString detail);
     void rankingListsGot(QString lists);
@@ -32,6 +38,7 @@ signals:
 
 public slots:
     void login(QString, QString);
+    void getUserPlaylists(QString);
     void getTopPlaylists();
     void getPlaylistDetail(QString);
     void getRankingLists();
@@ -45,6 +52,8 @@ public slots:
     Song* getPlaylistItemById(QString id);
 
 private:
+    QString m_userId;
+
     NeteaseAPI* m_api;
     PlaylistModel* m_playlistModel;
     Database *m_database;

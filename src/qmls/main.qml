@@ -124,9 +124,31 @@ Window {
 
             onLoginSucceed: {
                 login_dialog.close()
+
+                var loginInfo = JSON.parse(info)
+                var userId = loginInfo["profile"]["userId"]
+                _controller.userId = userId
+                _controller.getUserPlaylists(userId)
             }
 
             onLoginFailed: {}
+
+            onUserPlaylistsGot: {
+                var playlists = JSON.parse(userPlaylists)
+                var userCreated = []
+                var userMarked = []
+
+                for (var i = 0; i < playlists.length; i++) {
+                    if (playlists[i].creator.userId == _controller.userId) {
+                        userCreated.push(playlists[i])
+                    } else {
+                        userMarked.push(playlists[i])
+                    }
+                }
+
+                side_bar.setCreatedPlaylists(userCreated)
+                side_bar.setMarkedPlaylists(userMarked)
+            }
 
             onLyricGot: {
                 current_song.lyric = lyric
@@ -163,6 +185,8 @@ Window {
                     id: side_bar
                     width: 200
                     height: parent.height
+
+                    onPlaylistClicked: playlist_detail_view.setPlaylist(playlistId)
                 }
 
                 VSep { height: parent.height }

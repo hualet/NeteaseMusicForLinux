@@ -12,6 +12,12 @@ Dialog {
 
     signal login(string account, string password)
 
+    onAccepted: {
+        if (!(account_input.text && password_input.text)) return
+
+        root.login(account_input.text, password_input.text)
+    }
+
     Rectangle {
         color: "lightgrey"
         anchors.fill: parent

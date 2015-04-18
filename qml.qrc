@@ -26,5 +26,6 @@
         <file>src/qmls/PlaylistView.qml</file>
         <file>src/qmls/LoginDialog.qml</file>
         <file>src/qmls/widgets/HTTextInput.qml</file>
+        <file>src/qmls/SideBarPlaylists.qml</file>
     </qresource>
 </RCC>

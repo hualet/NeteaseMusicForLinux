@@ -17,6 +17,7 @@ public:
     ~NeteaseAPI();
 
     void login(QString, QString);
+    void userPlaylist(QString);
     void topPlaylist(QString category="全部", QString order="hot", quint8 offset=0, quint8 limit=50);
     void playlistDetail(QString);
     void rankingLists();
@@ -27,6 +28,7 @@ public:
 signals:
     void loginSucceed(QString info);
     void loginFailed();
+    void userPlaylistGot(QString playlist);
     void topPlaylistGot(QString playlists);
     void playlistDetailGot(QString detail);
     void rankingListsGot(QString lists);
@@ -36,6 +38,7 @@ signals:
 
 private slots:
     void handleLoginFinished();
+    void handleUserPlaylistFinished();
     void handleTopPlaylistFinished();
     void handlePlaylistDetailFinished();
     void handleRankingListsFinished();
