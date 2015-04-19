@@ -122,11 +122,12 @@ Window {
 
             onLoginSucceed: {
                 login_dialog.close()
-
                 var loginInfo = JSON.parse(info)
-                var userId = loginInfo["profile"]["userId"]
-                _settings.userId = userId
-                _controller.getUserPlaylists(userId)
+
+                _settings.userId = loginInfo["profile"]["userId"]
+                _settings.userNickname = loginInfo["profile"]["nickname"]
+                _settings.userAvatarUrl = loginInfo["profile"]["avatarUrl"]
+                _controller.getUserPlaylists(_settings.userId)
             }
 
             onLoginFailed: {}
@@ -168,10 +169,14 @@ Window {
                 width: parent.width
                 canGoBack: views_history_manager.canGoBack
                 canGoForward: views_history_manager.canGoForward
+                userNickname: _settings.userNickname
+                userAvatarUrl: _settings.userAvatarUrl
 
                 onGoBack: window_content.goBack()
                 onGoForward: window_content.goForward()
                 onLogin: login_dialog.open()
+
+                Component.onCompleted: print(_settings.userNickname)
             }
 
             Row {
@@ -214,10 +219,12 @@ Window {
                             HTTabContent {
                                 width: parent.width
                                 height: parent.height
+                                contentWidth: width
+                                contentHeight: banners_view.height + title_hotspot.height + hotspot_icon_view.height
 
                                 HTBannersView {
                                     id: banners_view
-
+                                    width: parent.width - 20
                                     anchors.horizontalCenter: parent.horizontalCenter
 
                                     Connections {
@@ -228,13 +235,23 @@ Window {
                                     Component.onCompleted: _controller.getBanners()
                                 }
 
+                                HTSectionTitle {
+                                    id: title_hotspot
+                                    width: parent.width - 20
+                                    title: "热门精选"
+
+                                    anchors.top: banners_view.bottom
+                                    anchors.topMargin: 40
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                }
+
                                 PlaylistIconView {
                                     id: hotspot_icon_view
                                     width: cellWidth * 4
-                                    height: parent.height
+                                    height: childrenRect.height
 
-                                    anchors.top: banners_view.bottom
-                                    anchors.topMargin: 20
+                                    anchors.top: title_hotspot.bottom
+                                    anchors.topMargin: 10
                                     anchors.horizontalCenter: parent.horizontalCenter
 
                                     Connections {
@@ -256,11 +273,13 @@ Window {
                             HTTabContent {
                                 width: parent.width
                                 height: parent.height
+                                contentWidth: toplist_icon_view.width
+                                contentHeight: toplist_icon_view.height
 
                                 PlaylistIconView {
                                     id: toplist_icon_view
                                     width: cellWidth * 4
-                                    height: parent.height
+                                    height: childrenRect.height
 
                                     anchors.horizontalCenter: parent.horizontalCenter
 
@@ -280,22 +299,29 @@ Window {
                         Tab {
                             title: "歌单"
 
-                            PlaylistIconView {
-                                id: playlists_icon_view
-                                width: cellWidth * 4
+                            HTTabContent {
+                                width: parent.width
                                 height: parent.height
+                                contentWidth: playlists_icon_view.width
+                                contentHeight: playlists_icon_view.height
 
-                                anchors.horizontalCenter: parent.horizontalCenter
+                                PlaylistIconView {
+                                    id: playlists_icon_view
+                                    width: cellWidth * 4
+                                    height: childrenRect.height
 
-                                Connections {
-                                    target: _controller
-                                    onTopPlaylistsGot: playlists_icon_view.setData(playlists)
-                                }
+                                    anchors.horizontalCenter: parent.horizontalCenter
 
-                                Component.onCompleted: _controller.getTopPlaylists()
+                                    Connections {
+                                        target: _controller
+                                        onTopPlaylistsGot: playlists_icon_view.setData(playlists)
+                                    }
 
-                                onPlaylistClicked: {
-                                    playlist_detail_view.setPlaylist(playlistId)
+                                    Component.onCompleted: _controller.getTopPlaylists()
+
+                                    onPlaylistClicked: {
+                                        playlist_detail_view.setPlaylist(playlistId)
+                                    }
                                 }
                             }
                         }

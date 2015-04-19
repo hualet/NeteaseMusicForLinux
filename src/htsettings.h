@@ -12,6 +12,8 @@ public:
     Q_PROPERTY(double volume READ volume WRITE setVolume)
     Q_PROPERTY(QString lastSong READ lastSong WRITE setLastSong)
     Q_PROPERTY(QString userId READ userId WRITE setUserId NOTIFY userIdChanged)
+    Q_PROPERTY(QString userNickname READ userNickname WRITE setUserNickname NOTIFY userNicknameChanged)
+    Q_PROPERTY(QString userAvatarUrl READ userAvatarUrl WRITE setUserAvatarUrl NOTIFY userAvatarUrlChanged)
 
     double volume();
     void setVolume(double volume);
@@ -22,8 +24,16 @@ public:
     QString userId() const;
     void setUserId(QString& userId);
 
+    QString userNickname() const;
+    void setUserNickname(QString& nickname);
+
+    QString userAvatarUrl() const;
+    void setUserAvatarUrl(QString& avatarUrl);
+
 signals:
     void userIdChanged();
+    void userNicknameChanged();
+    void userAvatarUrlChanged();
 };
 
 #endif // HTSETTINGS_H

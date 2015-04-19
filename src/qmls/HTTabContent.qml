@@ -1,20 +1,22 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.2
 
-Item {
+Flickable {
+    id: root
+    clip: true
     default property alias contents: item.children
 
     Item {
         id: place_holder
-        width: parent.width
+        width: root.width
         height: 30
     }
 
     Item {
         id: item
         clip: true
-        width: parent.width
+        width: root.width
+        height: root.contentHeight - place_holder.height
         anchors.top: place_holder.bottom
-        anchors.bottom: parent.bottom
     }
 }

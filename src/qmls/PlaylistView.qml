@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
+import "../qmls/widgets/"
 import "../qmls/utils.js" as Utils
 
 Item {

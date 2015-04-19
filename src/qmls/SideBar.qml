@@ -28,7 +28,7 @@ Rectangle {
             id: user_playlists_column
 //            clip: true
             width: root.width - 20
-            height: 400
+            height: root.height - 100
             anchors.top: parent.top
             anchors.topMargin: 10
             anchors.left: parent.left

@@ -1,5 +1,6 @@
 import QtQuick 2.0
 
+import "../qmls/widgets/"
 import "qrc:/src/qmls/utils.js" as Utils
 
 ListView {

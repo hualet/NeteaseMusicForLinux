@@ -5,8 +5,8 @@
         <file>src/qmls/Footer.qml</file>
         <file>src/qmls/PlaylistIconView.qml</file>
         <file>src/qmls/HTTabView.qml</file>
-        <file>src/qmls/HSep.qml</file>
-        <file>src/qmls/VSep.qml</file>
+        <file>src/qmls/widgets/HSep.qml</file>
+        <file>src/qmls/widgets/VSep.qml</file>
         <file>src/qmls/HTTabContent.qml</file>
         <file>src/qmls/SongsListView.qml</file>
         <file>src/qmls/HTImageButton.qml</file>
@@ -26,6 +26,7 @@
         <file>src/qmls/PlaylistView.qml</file>
         <file>src/qmls/LoginDialog.qml</file>
         <file>src/qmls/widgets/HTTextInput.qml</file>
+        <file>src/qmls/widgets/HTSectionTitle.qml</file>
         <file>src/qmls/SideBarPlaylists.qml</file>
     </qresource>
 </RCC>

@@ -7,6 +7,8 @@ Item {
     width: 100
     height: 70
 
+    property alias userNickname: nickname.text
+    property alias userAvatarUrl: avatar.source
     property alias canGoBack: go_back_button.enabled
     property alias canGoForward: go_forward_button.enabled
 
@@ -67,11 +69,36 @@ Item {
 
     HTTextButton {
         text: "登录"
+        visible: !root.userNickname
         anchors.right: parent.right
         anchors.rightMargin: 20
         anchors.verticalCenter: parent.verticalCenter
 
         onClicked: root.login()
+    }
+
+    Row {
+        visible: root.userNickname
+        height: avatar.height
+        spacing: 5
+        anchors.right: parent.right
+        anchors.rightMargin: 20
+        anchors.verticalCenter: parent.verticalCenter
+
+        Image {
+            id: avatar
+            width: 32
+            height: 32
+            smooth: true
+        }
+
+        Text {
+            id: nickname
+            font.pixelSize: 16
+            color: "white"
+
+            anchors.verticalCenter: parent.verticalCenter
+        }
     }
 }
 
