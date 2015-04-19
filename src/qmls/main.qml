@@ -127,7 +127,7 @@ Window {
 
                 var loginInfo = JSON.parse(info)
                 var userId = loginInfo["profile"]["userId"]
-                _controller.userId = userId
+                _settings.userId = userId
                 _controller.getUserPlaylists(userId)
             }
 
@@ -139,7 +139,7 @@ Window {
                 var userMarked = []
 
                 for (var i = 0; i < playlists.length; i++) {
-                    if (playlists[i].creator.userId == _controller.userId) {
+                    if (playlists[i].creator.userId == _settings.userId) {
                         userCreated.push(playlists[i])
                     } else {
                         userMarked.push(playlists[i])
@@ -187,6 +187,12 @@ Window {
                     height: parent.height
 
                     onPlaylistClicked: playlist_detail_view.setPlaylist(playlistId)
+
+                    Component.onCompleted: {
+                        if (_settings.userId) {
+                            _controller.getUserPlaylists(_settings.userId)
+                        }
+                    }
                 }
 
                 VSep { height: parent.height }

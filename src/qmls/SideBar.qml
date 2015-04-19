@@ -33,9 +33,9 @@ Rectangle {
 
         SideBarPlaylists {
             id: created_playlists
-            width: parent.width - 20
+            width: parent.width - 10
             anchors.left: parent.left
-            anchors.leftMargin: 20
+            anchors.leftMargin: 10
 
             onPlaylistClicked: root.playlistClicked(playlistId)
         }
@@ -47,9 +47,9 @@ Rectangle {
 
         SideBarPlaylists {
             id: marked_playlists
-            width: parent.width - 20
+            width: parent.width - 10
             anchors.left: parent.left
-            anchors.leftMargin: 20
+            anchors.leftMargin: 10
 
             onPlaylistClicked: root.playlistClicked(playlistId)
         }

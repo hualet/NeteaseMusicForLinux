@@ -75,19 +75,6 @@ Song* AppController::getPlaylistItemById(QString id)
     return m_playlistModel->getSongById(id);
 }
 
-QString AppController::userId() const
-{
-    return m_userId;
-}
-
-void AppController::setUserId(QString userId)
-{
-    if (m_userId != userId) {
-        m_userId = userId;
-        emit userIdChanged();
-    }
-}
-
 PlaylistModel *AppController::playlistModel() const
 {
     return m_playlistModel;

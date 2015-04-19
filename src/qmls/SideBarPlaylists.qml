@@ -10,11 +10,13 @@ ListView {
     model: ListModel{}
     delegate: Item {
         width: list_view.width
-        height: txt.implicitHeight + 16
+        height: txt.implicitHeight + 10
         Text {
             id: txt
+            width: parent.width
             text: name
-            color: Qt.rgba(0, 0, 0, 0.8)
+            elide: Text.ElideRight
+            color: Qt.rgba(0, 0, 0, 0.9)
             anchors.verticalCenter: parent.verticalCenter
         }
 
