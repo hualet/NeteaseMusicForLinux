@@ -96,9 +96,7 @@ Window {
             Component.onCompleted: {
                 var id = _settings.lastSong
                 if (id) {
-                    print(id)
                     var song = _controller.getPlaylistItemById(id)
-                    print(song)
                     if (song) {
                         current_song.id = song.id
                         current_song.mp3Url = song.mp3Url
@@ -324,6 +322,7 @@ Window {
                         }
 
                         function playlistDetailGot(detail) {
+                            print(detail)
                             var result = JSON.parse(detail)
 
                             playlist_detail_view.id = result.id
@@ -331,7 +330,7 @@ Window {
                             playlist_detail_view.coverImgUrl = result.coverImgUrl
                             playlist_detail_view.creator = result.creator.nickname
                             playlist_detail_view.createTime = result.createTime
-                            playlist_detail_view.description = result.description
+                            playlist_detail_view.description = result.description || ""
                             playlist_detail_view.setData(result.tracks)
 
                             playlist_detail_view.visible = true
