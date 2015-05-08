@@ -1,4 +1,6 @@
 #NeteaseMusicForLinux
+
+[![Join the chat at https://gitter.im/hualet/NeteaseMusicForLinux](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hualet/NeteaseMusicForLinux?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 网易云音乐的Linux版本
 
 ![Imgur](http://i.imgur.com/KDG8KVX.png =500x300)
